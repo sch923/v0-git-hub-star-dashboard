@@ -72,5 +72,32 @@
   }
   body {
     @apply bg-background text-foreground;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 182, 193, 0.1) 0%,
+      rgba(255, 218, 185, 0.1) 25%,
+      rgba(186, 230, 253, 0.1) 50%,
+      rgba(196, 181, 253, 0.1) 75%,
+      rgba(254, 202, 202, 0.1) 100%
+    );
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+
+  .glass-card {
+    @apply bg-white/20 backdrop-blur-lg border border-white/30 shadow-2xl;
+  }
+
+  .glass-header {
+    @apply bg-white/30 backdrop-blur-xl border-b border-white/20;
+  }
+
+  .glass-button {
+    @apply bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/30 transition-all duration-300;
   }
 }

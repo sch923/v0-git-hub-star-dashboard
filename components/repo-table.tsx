@@ -59,42 +59,47 @@ export function RepoTable({ sortBy = "stars" }: RepoTableProps) {
   })
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Repository</TableHead>
-          <TableHead className="text-right">Stars</TableHead>
-          {sortBy === "growth" && <TableHead className="text-right">Growth</TableHead>}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {sortedRepos.map((repo) => (
-          <TableRow key={`${repo.owner}/${repo.name}`}>
-            <TableCell>
-              <Link href={`/repo/${repo.owner}/${repo.name}`} className="hover:underline">
-                <div className="font-medium">{repo.name}</div>
-                <div className="text-sm text-muted-foreground">{repo.owner}</div>
-                <Badge variant="outline" className="mt-1">
-                  {repo.language}
-                </Badge>
-              </Link>
-            </TableCell>
-            <TableCell className="text-right">
-              <div className="flex items-center justify-end gap-1">
-                <span>{repo.stars.toLocaleString()}</span>
-                <StarIcon className="h-4 w-4 text-yellow-400" />
-              </div>
-            </TableCell>
-            {sortBy === "growth" && (
-              <TableCell className="text-right">
-                <Badge variant="outline" className="bg-green-50">
-                  +{repo.growth.toLocaleString()} this week
-                </Badge>
-              </TableCell>
-            )}
+    <div className="glass rounded-lg overflow-hidden">
+      <Table>
+        <TableHeader>
+          <TableRow className="border-white/20 hover:bg-white/5">
+            <TableHead className="text-white/80">Repository</TableHead>
+            <TableHead className="text-right text-white/80">Stars</TableHead>
+            {sortBy === "growth" && <TableHead className="text-right text-white/80">Growth</TableHead>}
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {sortedRepos.map((repo) => (
+            <TableRow
+              key={`${repo.owner}/${repo.name}`}
+              className="border-white/10 hover:bg-white/10 transition-colors"
+            >
+              <TableCell>
+                <Link href={`/repo/${repo.owner}/${repo.name}`} className="hover:underline">
+                  <div className="font-medium text-white/90">{repo.name}</div>
+                  <div className="text-sm text-white/60">{repo.owner}</div>
+                  <Badge variant="outline" className="mt-1 bg-white/10 border-white/30 text-white/80">
+                    {repo.language}
+                  </Badge>
+                </Link>
+              </TableCell>
+              <TableCell className="text-right">
+                <div className="flex items-center justify-end gap-1">
+                  <span className="text-white/90">{repo.stars.toLocaleString()}</span>
+                  <StarIcon className="h-4 w-4 text-yellow-300 drop-shadow-lg" />
+                </div>
+              </TableCell>
+              {sortBy === "growth" && (
+                <TableCell className="text-right">
+                  <Badge variant="outline" className="bg-green-500/20 border-green-400/30 text-green-200">
+                    +{repo.growth.toLocaleString()} this week
+                  </Badge>
+                </TableCell>
+              )}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   )
 }

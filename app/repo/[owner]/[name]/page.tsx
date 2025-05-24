@@ -24,70 +24,109 @@ export default function RepoPage({ params }: RepoPageProps) {
   const { owner, name } = params
 
   return (
-    <div className="flex min-h-screen w-full flex-col">
-      <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-        <Button variant="ghost" size="icon" asChild>
+    <div className="flex min-h-screen w-full flex-col relative">
+      {/* 背景のグラデーション装飾 */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute top-0 left-0 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
+        <div className="absolute top-0 right-0 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse animation-delay-2000"></div>
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse animation-delay-4000"></div>
+        <div className="absolute bottom-0 right-0 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse animation-delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-green-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-3000"></div>
+      </div>
+
+      <header className="sticky top-0 z-10 flex h-16 items-center gap-4 glass-header px-4 md:px-6">
+        <Button variant="ghost" size="icon" className="glass-button text-white hover:text-white" asChild>
           <Link href="/">
             <ArrowLeft className="h-5 w-5" />
             <span className="sr-only">Back to dashboard</span>
           </Link>
         </Button>
-        <div className="flex items-center gap-2 font-semibold">
-          <StarIcon className="h-5 w-5 text-yellow-400" />
-          <span>GitHub Stars Dashboard</span>
+        <div className="flex items-center gap-2 font-semibold text-white drop-shadow-lg">
+          <StarIcon className="h-5 w-5 text-yellow-300 drop-shadow-lg" />
+          <span className="bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
+            GitHub Stars Dashboard
+          </span>
         </div>
       </header>
+
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-        <Suspense fallback={<Skeleton className="h-[100px] w-full" />}>
+        <Suspense fallback={<Skeleton className="h-[100px] w-full bg-white/10" />}>
           <RepoHeader owner={owner} name={name} />
         </Suspense>
 
-        <Suspense fallback={<Skeleton className="h-[120px] w-full" />}>
+        <Suspense fallback={<Skeleton className="h-[120px] w-full bg-white/10" />}>
           <RepoStatsGrid owner={owner} name={name} />
         </Suspense>
 
         <Tabs defaultValue="overview" className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="stars">Stars</TabsTrigger>
-            <TabsTrigger value="forks">Forks</TabsTrigger>
-            <TabsTrigger value="issues">Issues & PRs</TabsTrigger>
-            <TabsTrigger value="contributors">Contributors</TabsTrigger>
+          <TabsList className="bg-white/10 backdrop-blur-md border border-white/20">
+            <TabsTrigger
+              value="overview"
+              className="text-white/80 data-[state=active]:bg-white/20 data-[state=active]:text-white"
+            >
+              Overview
+            </TabsTrigger>
+            <TabsTrigger
+              value="stars"
+              className="text-white/80 data-[state=active]:bg-white/20 data-[state=active]:text-white"
+            >
+              Stars
+            </TabsTrigger>
+            <TabsTrigger
+              value="forks"
+              className="text-white/80 data-[state=active]:bg-white/20 data-[state=active]:text-white"
+            >
+              Forks
+            </TabsTrigger>
+            <TabsTrigger
+              value="issues"
+              className="text-white/80 data-[state=active]:bg-white/20 data-[state=active]:text-white"
+            >
+              Issues & PRs
+            </TabsTrigger>
+            <TabsTrigger
+              value="contributors"
+              className="text-white/80 data-[state=active]:bg-white/20 data-[state=active]:text-white"
+            >
+              Contributors
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              <Card className="col-span-2">
+              <Card className="col-span-2 glass-card border-0">
                 <CardHeader>
-                  <CardTitle>Repository Activity</CardTitle>
-                  <CardDescription>Commits, issues, and pull requests over time</CardDescription>
+                  <CardTitle className="text-white/90">Repository Activity</CardTitle>
+                  <CardDescription className="text-white/70">
+                    Commits, issues, and pull requests over time
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="p-0 pt-4">
                   <div className="h-[350px]">
-                    <Suspense fallback={<Skeleton className="h-full w-full" />}>
+                    <Suspense fallback={<Skeleton className="h-full w-full bg-white/10" />}>
                       <RepoDetailChart owner={owner} name={name} type="activity" className="h-full" />
                     </Suspense>
                   </div>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="glass-card border-0">
                 <CardHeader>
-                  <CardTitle>README</CardTitle>
+                  <CardTitle className="text-white/90">README</CardTitle>
                 </CardHeader>
                 <CardContent className="max-h-[350px] overflow-auto">
-                  <Suspense fallback={<Skeleton className="h-[350px] w-full" />}>
+                  <Suspense fallback={<Skeleton className="h-[350px] w-full bg-white/10" />}>
                     <RepoReadme owner={owner} name={name} />
                   </Suspense>
                 </CardContent>
               </Card>
             </div>
-            <Card>
+            <Card className="glass-card border-0">
               <CardHeader>
-                <CardTitle>Recent Activity</CardTitle>
-                <CardDescription>Latest commits, issues, and pull requests</CardDescription>
+                <CardTitle className="text-white/90">Recent Activity</CardTitle>
+                <CardDescription className="text-white/70">Latest commits, issues, and pull requests</CardDescription>
               </CardHeader>
               <CardContent>
-                <Suspense fallback={<Skeleton className="h-[350px] w-full" />}>
+                <Suspense fallback={<Skeleton className="h-[350px] w-full bg-white/10" />}>
                   <RepoActivity owner={owner} name={name} />
                 </Suspense>
               </CardContent>
@@ -95,14 +134,14 @@ export default function RepoPage({ params }: RepoPageProps) {
           </TabsContent>
 
           <TabsContent value="stars" className="space-y-4">
-            <Card>
+            <Card className="glass-card border-0">
               <CardHeader>
-                <CardTitle>Star History</CardTitle>
-                <CardDescription>Star count over time</CardDescription>
+                <CardTitle className="text-white/90">Star History</CardTitle>
+                <CardDescription className="text-white/70">Star count over time</CardDescription>
               </CardHeader>
               <CardContent className="p-0 pt-4">
                 <div className="h-[400px]">
-                  <Suspense fallback={<Skeleton className="h-full w-full" />}>
+                  <Suspense fallback={<Skeleton className="h-full w-full bg-white/10" />}>
                     <RepoDetailChart owner={owner} name={name} type="stars" className="h-full" />
                   </Suspense>
                 </div>
@@ -111,14 +150,14 @@ export default function RepoPage({ params }: RepoPageProps) {
           </TabsContent>
 
           <TabsContent value="forks" className="space-y-4">
-            <Card>
+            <Card className="glass-card border-0">
               <CardHeader>
-                <CardTitle>Fork History</CardTitle>
-                <CardDescription>Fork count over time</CardDescription>
+                <CardTitle className="text-white/90">Fork History</CardTitle>
+                <CardDescription className="text-white/70">Fork count over time</CardDescription>
               </CardHeader>
               <CardContent className="p-0 pt-4">
                 <div className="h-[400px]">
-                  <Suspense fallback={<Skeleton className="h-full w-full" />}>
+                  <Suspense fallback={<Skeleton className="h-full w-full bg-white/10" />}>
                     <RepoDetailChart owner={owner} name={name} type="forks" className="h-full" />
                   </Suspense>
                 </div>
@@ -127,14 +166,16 @@ export default function RepoPage({ params }: RepoPageProps) {
           </TabsContent>
 
           <TabsContent value="issues" className="space-y-4">
-            <Card>
+            <Card className="glass-card border-0">
               <CardHeader>
-                <CardTitle>Issues & Pull Requests</CardTitle>
-                <CardDescription>Open and closed issues and pull requests over time</CardDescription>
+                <CardTitle className="text-white/90">Issues & Pull Requests</CardTitle>
+                <CardDescription className="text-white/70">
+                  Open and closed issues and pull requests over time
+                </CardDescription>
               </CardHeader>
               <CardContent className="p-0 pt-4">
                 <div className="h-[400px]">
-                  <Suspense fallback={<Skeleton className="h-full w-full" />}>
+                  <Suspense fallback={<Skeleton className="h-full w-full bg-white/10" />}>
                     <RepoDetailChart owner={owner} name={name} type="issues" className="h-full" />
                   </Suspense>
                 </div>
@@ -143,13 +184,13 @@ export default function RepoPage({ params }: RepoPageProps) {
           </TabsContent>
 
           <TabsContent value="contributors" className="space-y-4">
-            <Card>
+            <Card className="glass-card border-0">
               <CardHeader>
-                <CardTitle>Top Contributors</CardTitle>
-                <CardDescription>Most active contributors to this repository</CardDescription>
+                <CardTitle className="text-white/90">Top Contributors</CardTitle>
+                <CardDescription className="text-white/70">Most active contributors to this repository</CardDescription>
               </CardHeader>
               <CardContent>
-                <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
+                <Suspense fallback={<Skeleton className="h-[400px] w-full bg-white/10" />}>
                   <RepoContributors owner={owner} name={name} />
                 </Suspense>
               </CardContent>
