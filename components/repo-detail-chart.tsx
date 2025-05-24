@@ -214,11 +214,9 @@ export function RepoDetailChart({ owner, name, type, className, ...props }: Repo
 
   return (
     <div className={`${className} w-full h-full min-h-[350px]`} {...props}>
-      <div className="w-full h-full bg-white/15 backdrop-blur-sm rounded-lg border border-white/25 shadow-lg">
-        <ResponsiveContainer width="100%" height="100%">
-          {renderChart()}
-        </ResponsiveContainer>
-      </div>
+      <ResponsiveContainer width="100%" height="100%">
+        {renderChart()}
+      </ResponsiveContainer>
     </div>
   )
 }

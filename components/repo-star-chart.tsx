@@ -69,80 +69,78 @@ export function RepoStarChart({ className, ...props }: RepoStarChartProps) {
 
   return (
     <div className={`${className} w-full h-full min-h-[350px]`} {...props}>
-      <div className="w-full h-full bg-white/15 backdrop-blur-sm rounded-lg border border-white/25 shadow-lg">
-        <ResponsiveContainer width="100%" height="100%">
-          <AreaChart
-            data={sampleData}
-            margin={{
-              top: 20,
-              right: 30,
-              left: 20,
-              bottom: 20,
+      <ResponsiveContainer width="100%" height="100%">
+        <AreaChart
+          data={sampleData}
+          margin={{
+            top: 20,
+            right: 30,
+            left: 20,
+            bottom: 20,
+          }}
+        >
+          <defs>
+            <linearGradient id="colorNextjs" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#0070f3" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#0070f3" stopOpacity={0.1} />
+            </linearGradient>
+            <linearGradient id="colorReact" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#61dafb" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#61dafb" stopOpacity={0.1} />
+            </linearGradient>
+            <linearGradient id="colorV0" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#000000" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#000000" stopOpacity={0.1} />
+            </linearGradient>
+          </defs>
+          <CartesianGrid strokeDasharray="3 3" stroke="#374151" strokeWidth={1} />
+          <XAxis
+            dataKey="name"
+            tick={{ fill: "#111827", fontSize: 12, fontWeight: "bold" }}
+            axisLine={{ stroke: "#374151", strokeWidth: 2 }}
+            tickLine={{ stroke: "#374151", strokeWidth: 2 }}
+          />
+          <YAxis
+            tick={{ fill: "#111827", fontSize: 12, fontWeight: "bold" }}
+            axisLine={{ stroke: "#374151", strokeWidth: 2 }}
+            tickLine={{ stroke: "#374151", strokeWidth: 2 }}
+          />
+          <Tooltip
+            content={({ active, payload, label }) => {
+              if (active && payload && payload.length) {
+                return (
+                  <Card className="p-3 shadow-xl border bg-white/90 backdrop-blur-md">
+                    <div className="font-bold text-gray-900 mb-2">{label}</div>
+                    {payload.map((entry, index) => (
+                      <div key={`item-${index}`} style={{ color: entry.color }} className="font-semibold">
+                        {entry.name}: {entry.value?.toLocaleString()} stars
+                      </div>
+                    ))}
+                  </Card>
+                )
+              }
+              return null
             }}
-          >
-            <defs>
-              <linearGradient id="colorNextjs" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#0070f3" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#0070f3" stopOpacity={0.1} />
-              </linearGradient>
-              <linearGradient id="colorReact" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#61dafb" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#61dafb" stopOpacity={0.1} />
-              </linearGradient>
-              <linearGradient id="colorV0" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#000000" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#000000" stopOpacity={0.1} />
-              </linearGradient>
-            </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#374151" strokeWidth={1} />
-            <XAxis
-              dataKey="name"
-              tick={{ fill: "#111827", fontSize: 12, fontWeight: "bold" }}
-              axisLine={{ stroke: "#374151", strokeWidth: 2 }}
-              tickLine={{ stroke: "#374151", strokeWidth: 2 }}
-            />
-            <YAxis
-              tick={{ fill: "#111827", fontSize: 12, fontWeight: "bold" }}
-              axisLine={{ stroke: "#374151", strokeWidth: 2 }}
-              tickLine={{ stroke: "#374151", strokeWidth: 2 }}
-            />
-            <Tooltip
-              content={({ active, payload, label }) => {
-                if (active && payload && payload.length) {
-                  return (
-                    <Card className="p-3 shadow-xl border bg-white/90 backdrop-blur-md">
-                      <div className="font-bold text-gray-900 mb-2">{label}</div>
-                      {payload.map((entry, index) => (
-                        <div key={`item-${index}`} style={{ color: entry.color }} className="font-semibold">
-                          {entry.name}: {entry.value?.toLocaleString()} stars
-                        </div>
-                      ))}
-                    </Card>
-                  )
-                }
-                return null
-              }}
-            />
-            <Area
-              type="monotone"
-              dataKey="next.js"
-              stroke="#0070f3"
-              strokeWidth={3}
-              fillOpacity={1}
-              fill="url(#colorNextjs)"
-            />
-            <Area
-              type="monotone"
-              dataKey="react"
-              stroke="#61dafb"
-              strokeWidth={3}
-              fillOpacity={1}
-              fill="url(#colorReact)"
-            />
-            <Area type="monotone" dataKey="v0" stroke="#000000" strokeWidth={3} fillOpacity={1} fill="url(#colorV0)" />
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
+          />
+          <Area
+            type="monotone"
+            dataKey="next.js"
+            stroke="#0070f3"
+            strokeWidth={3}
+            fillOpacity={1}
+            fill="url(#colorNextjs)"
+          />
+          <Area
+            type="monotone"
+            dataKey="react"
+            stroke="#61dafb"
+            strokeWidth={3}
+            fillOpacity={1}
+            fill="url(#colorReact)"
+          />
+          <Area type="monotone" dataKey="v0" stroke="#000000" strokeWidth={3} fillOpacity={1} fill="url(#colorV0)" />
+        </AreaChart>
+      </ResponsiveContainer>
     </div>
   )
 }

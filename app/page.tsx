@@ -102,7 +102,7 @@ export default function DashboardPage() {
         </div>
 
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
-          <Card className="xl:col-span-2 bg-transparent border-0 shadow-none">
+          <Card className="xl:col-span-2 glass-card-blue border-0">
             <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
                 <CardTitle className="text-gray-900 drop-shadow-md text-lg font-bold">Star History</CardTitle>
@@ -121,7 +121,7 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="xl:col-span-1 bg-transparent border-0 shadow-none">
+          <Card className="xl:col-span-1 glass-card-teal border-0">
             <CardHeader>
               <CardTitle className="text-gray-900 drop-shadow-md text-lg font-bold">Top Repositories</CardTitle>
               <CardDescription className="text-gray-800 drop-shadow-sm font-medium">
