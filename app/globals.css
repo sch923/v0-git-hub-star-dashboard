@@ -88,6 +88,10 @@
     @apply bg-white/20 backdrop-blur-md border border-white/30 shadow-xl;
   }
 
+  .glass-transparent {
+    @apply bg-white/40 backdrop-blur-none border border-white/30 shadow-xl;
+  }
+
   .glass-card {
     @apply bg-white/25 backdrop-blur-lg border border-white/35 shadow-xl;
   }

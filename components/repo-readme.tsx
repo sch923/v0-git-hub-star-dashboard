@@ -91,8 +91,14 @@ function formatMarkdown(markdown: string) {
     .replace(/^### (.*$)/gm, "<h3>$1</h3>")
     .replace(/\*\*(.*)\*\*/gm, "<strong>$1</strong>")
     .replace(/\*(.*)\*/gm, "<em>$1</em>")
-    .replace(/\[(.*?)\]$$(.*?)$$/gm, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-    .replace(/```(.*?)```/gs, (match, p1) => `<pre><code>${p1}</code></pre>`)
+    .replace(
+      /\[(.*?)\]$$(.*?)$$/gm,
+      '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
+    )
+    .replace(
+      /```([\s\S]*?)```/g,
+      (match, p1) => `<pre><code>${p1}</code></pre>`
+    )
     .replace(/`(.*?)`/gm, "<code>$1</code>")
     .replace(/\n/gm, "<br>")
 }

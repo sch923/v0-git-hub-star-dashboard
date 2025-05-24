@@ -59,7 +59,8 @@ const getChartData = (owner: string, name: string, type: string) => {
     return baseData.map((item) => ({
       name: item.name,
       openIssues: Math.floor(item.value * 0.1) * (name === "next.js" ? 1 : 0.4),
-      closedIssues: Math.floor(item.value * 0.08) * (name === "next.js" ? 1 : 0.4),
+      closedIssues:
+        Math.floor(item.value * 0.08) * (name === "next.js" ? 1 : 0.4),
       openPRs: Math.floor(item.value * 0.05) * (name === "next.js" ? 1 : 0.4),
       closedPRs: Math.floor(item.value * 0.04) * (name === "next.js" ? 1 : 0.4),
     }))
@@ -68,14 +69,21 @@ const getChartData = (owner: string, name: string, type: string) => {
       name: item.name,
       commits: Math.floor(item.value * 0.3) * (name === "next.js" ? 10 : 4),
       issues: Math.floor(item.value * 0.1) * (name === "next.js" ? 10 : 4),
-      pullRequests: Math.floor(item.value * 0.05) * (name === "next.js" ? 10 : 4),
+      pullRequests:
+        Math.floor(item.value * 0.05) * (name === "next.js" ? 10 : 4),
     }))
   }
 
   return baseData
 }
 
-export function RepoDetailChart({ owner, name, type, className, ...props }: RepoDetailChartProps) {
+export function RepoDetailChart({
+  owner,
+  name,
+  type,
+  className,
+  ...props
+}: RepoDetailChartProps) {
   const [mounted, setMounted] = useState(false)
   const data = getChartData(owner, name, type)
 
@@ -86,7 +94,9 @@ export function RepoDetailChart({ owner, name, type, className, ...props }: Repo
   // クライアントサイドレンダリングのためのプレースホルダー
   if (!mounted) {
     return (
-      <div className={`${className} flex items-center justify-center bg-gray-50`}>
+      <div
+        className={`${className} flex items-center justify-center bg-white/25 backdrop-blur-lg`}
+      >
         <p className="text-muted-foreground">Loading chart...</p>
       </div>
     )
@@ -107,10 +117,14 @@ export function RepoDetailChart({ owner, name, type, className, ...props }: Repo
   const tooltipContent = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <Card className="p-3 shadow-xl border bg-white/90 backdrop-blur-md">
+        <Card className="p-3 shadow-xl border bg-white/70">
           <div className="font-bold text-gray-900 mb-2">{label}</div>
           {payload.map((entry: any, index: number) => (
-            <div key={`item-${index}`} style={{ color: entry.color }} className="font-semibold">
+            <div
+              key={`item-${index}`}
+              style={{ color: entry.color }}
+              className="font-semibold"
+            >
               {entry.name}: {entry.value?.toLocaleString()}
             </div>
           ))}
@@ -124,7 +138,10 @@ export function RepoDetailChart({ owner, name, type, className, ...props }: Repo
     switch (type) {
       case "stars":
         return (
-          <AreaChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+          <AreaChart
+            data={data}
+            margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+          >
             <defs>
               <linearGradient id="colorStars" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#0070f3" stopOpacity={0.8} />
@@ -147,7 +164,10 @@ export function RepoDetailChart({ owner, name, type, className, ...props }: Repo
         )
       case "forks":
         return (
-          <AreaChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+          <AreaChart
+            data={data}
+            margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+          >
             <defs>
               <linearGradient id="colorForks" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#2563eb" stopOpacity={0.8} />
@@ -170,7 +190,10 @@ export function RepoDetailChart({ owner, name, type, className, ...props }: Repo
         )
       case "issues":
         return (
-          <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+          <LineChart
+            data={data}
+            margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+          >
             <CartesianGrid {...gridProps} />
             <XAxis dataKey="name" {...axisProps} />
             <YAxis {...axisProps} />
@@ -182,19 +205,49 @@ export function RepoDetailChart({ owner, name, type, className, ...props }: Repo
                 fontSize: "12px",
               }}
             />
-            <Line type="monotone" dataKey="openIssues" stroke="#f97316" strokeWidth={3} name="Open Issues" />
-            <Line type="monotone" dataKey="closedIssues" stroke="#84cc16" strokeWidth={3} name="Closed Issues" />
-            <Line type="monotone" dataKey="openPRs" stroke="#8b5cf6" strokeWidth={3} name="Open PRs" />
-            <Line type="monotone" dataKey="closedPRs" stroke="#14b8a6" strokeWidth={3} name="Closed PRs" />
+            <Line
+              type="monotone"
+              dataKey="openIssues"
+              stroke="#f97316"
+              strokeWidth={3}
+              name="Open Issues"
+            />
+            <Line
+              type="monotone"
+              dataKey="closedIssues"
+              stroke="#84cc16"
+              strokeWidth={3}
+              name="Closed Issues"
+            />
+            <Line
+              type="monotone"
+              dataKey="openPRs"
+              stroke="#8b5cf6"
+              strokeWidth={3}
+              name="Open PRs"
+            />
+            <Line
+              type="monotone"
+              dataKey="closedPRs"
+              stroke="#14b8a6"
+              strokeWidth={3}
+              name="Closed PRs"
+            />
           </LineChart>
         )
       case "activity":
         return (
-          <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+          <BarChart
+            data={data}
+            margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+          >
             <CartesianGrid {...gridProps} />
             <XAxis dataKey="name" {...axisProps} />
             <YAxis {...axisProps} />
-            <Tooltip content={tooltipContent} />
+            <Tooltip
+              content={tooltipContent}
+              cursor={{ fill: "transparent" }}
+            />
             <Legend
               wrapperStyle={{
                 color: "#111827",
@@ -215,7 +268,7 @@ export function RepoDetailChart({ owner, name, type, className, ...props }: Repo
   return (
     <div className={`${className} w-full h-full min-h-[350px]`} {...props}>
       <ResponsiveContainer width="100%" height="100%">
-        {renderChart()}
+        {renderChart() ?? <div />}
       </ResponsiveContainer>
     </div>
   )

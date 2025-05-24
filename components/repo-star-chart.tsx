@@ -3,7 +3,15 @@
 import type React from "react"
 
 import { useEffect, useState } from "react"
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts"
 
 import { Card } from "@/components/ui/card"
 
@@ -61,7 +69,9 @@ export function RepoStarChart({ className, ...props }: RepoStarChartProps) {
   // クライアントサイドレンダリングのためのプレースホルダー
   if (!mounted) {
     return (
-      <div className={`${className} flex items-center justify-center bg-gray-50`}>
+      <div
+        className={`${className} flex items-center justify-center bg-gray-50`}
+      >
         <p className="text-muted-foreground">Loading chart...</p>
       </div>
     )
@@ -93,7 +103,11 @@ export function RepoStarChart({ className, ...props }: RepoStarChartProps) {
               <stop offset="95%" stopColor="#000000" stopOpacity={0.1} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="#374151" strokeWidth={1} />
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="#374151"
+            strokeWidth={1}
+          />
           <XAxis
             dataKey="name"
             tick={{ fill: "#111827", fontSize: 12, fontWeight: "bold" }}
@@ -112,7 +126,11 @@ export function RepoStarChart({ className, ...props }: RepoStarChartProps) {
                   <Card className="p-3 shadow-xl border bg-white/90 backdrop-blur-md">
                     <div className="font-bold text-gray-900 mb-2">{label}</div>
                     {payload.map((entry, index) => (
-                      <div key={`item-${index}`} style={{ color: entry.color }} className="font-semibold">
+                      <div
+                        key={`item-${index}`}
+                        style={{ color: entry.color }}
+                        className="font-semibold"
+                      >
                         {entry.name}: {entry.value?.toLocaleString()} stars
                       </div>
                     ))}
@@ -138,7 +156,14 @@ export function RepoStarChart({ className, ...props }: RepoStarChartProps) {
             fillOpacity={1}
             fill="url(#colorReact)"
           />
-          <Area type="monotone" dataKey="v0" stroke="#000000" strokeWidth={3} fillOpacity={1} fill="url(#colorV0)" />
+          <Area
+            type="monotone"
+            dataKey="v0"
+            stroke="#000000"
+            strokeWidth={3}
+            fillOpacity={1}
+            fill="url(#colorV0)"
+          />
         </AreaChart>
       </ResponsiveContainer>
     </div>
