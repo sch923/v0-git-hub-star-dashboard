@@ -124,7 +124,7 @@ export function RepoDetailChart({ owner, name, type, className, ...props }: Repo
     switch (type) {
       case "stars":
         return (
-          <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+          <AreaChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
             <defs>
               <linearGradient id="colorStars" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#0070f3" stopOpacity={0.8} />
@@ -147,7 +147,7 @@ export function RepoDetailChart({ owner, name, type, className, ...props }: Repo
         )
       case "forks":
         return (
-          <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+          <AreaChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
             <defs>
               <linearGradient id="colorForks" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#2563eb" stopOpacity={0.8} />
@@ -170,7 +170,7 @@ export function RepoDetailChart({ owner, name, type, className, ...props }: Repo
         )
       case "issues":
         return (
-          <LineChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+          <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
             <CartesianGrid {...gridProps} />
             <XAxis dataKey="name" {...axisProps} />
             <YAxis {...axisProps} />
@@ -190,7 +190,7 @@ export function RepoDetailChart({ owner, name, type, className, ...props }: Repo
         )
       case "activity":
         return (
-          <BarChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+          <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
             <CartesianGrid {...gridProps} />
             <XAxis dataKey="name" {...axisProps} />
             <YAxis {...axisProps} />
@@ -214,9 +214,11 @@ export function RepoDetailChart({ owner, name, type, className, ...props }: Repo
 
   return (
     <div className={`${className} w-full h-full min-h-[350px]`} {...props}>
-      <ResponsiveContainer width="100%" height="100%">
-        {renderChart()}
-      </ResponsiveContainer>
+      <div className="w-full h-full bg-white/15 backdrop-blur-sm rounded-lg border border-white/25 shadow-lg">
+        <ResponsiveContainer width="100%" height="100%">
+          {renderChart()}
+        </ResponsiveContainer>
+      </div>
     </div>
   )
 }
