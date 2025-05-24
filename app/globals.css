@@ -80,67 +80,55 @@
     min-height: 100vh;
     position: relative;
   }
-
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(1px);
-    z-index: -1;
-  }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg;
+    @apply bg-white/20 backdrop-blur-md border border-white/30 shadow-xl;
   }
 
   .glass-card {
-    @apply bg-white/15 backdrop-blur-md border border-white/25 shadow-xl;
+    @apply bg-white/25 backdrop-blur-lg border border-white/35 shadow-xl;
   }
 
   .glass-card-blue {
-    @apply bg-blue-50/25 backdrop-blur-md border border-blue-200/35 shadow-xl;
+    @apply bg-blue-50/40 backdrop-blur-lg border border-blue-200/50 shadow-xl;
   }
 
   .glass-card-green {
-    @apply bg-green-50/25 backdrop-blur-md border border-green-200/35 shadow-xl;
+    @apply bg-green-50/40 backdrop-blur-lg border border-green-200/50 shadow-xl;
   }
 
   .glass-card-purple {
-    @apply bg-purple-50/25 backdrop-blur-md border border-purple-200/35 shadow-xl;
+    @apply bg-purple-50/40 backdrop-blur-lg border border-purple-200/50 shadow-xl;
   }
 
   .glass-card-orange {
-    @apply bg-orange-50/25 backdrop-blur-md border border-orange-200/35 shadow-xl;
+    @apply bg-orange-50/40 backdrop-blur-lg border border-orange-200/50 shadow-xl;
   }
 
   .glass-card-pink {
-    @apply bg-pink-50/25 backdrop-blur-md border border-pink-200/35 shadow-xl;
+    @apply bg-pink-50/40 backdrop-blur-lg border border-pink-200/50 shadow-xl;
   }
 
   .glass-card-indigo {
-    @apply bg-indigo-50/25 backdrop-blur-md border border-indigo-200/35 shadow-xl;
+    @apply bg-indigo-50/40 backdrop-blur-lg border border-indigo-200/50 shadow-xl;
   }
 
   .glass-card-teal {
-    @apply bg-teal-50/25 backdrop-blur-md border border-teal-200/35 shadow-xl;
+    @apply bg-teal-50/40 backdrop-blur-lg border border-teal-200/50 shadow-xl;
   }
 
   .glass-card-yellow {
-    @apply bg-yellow-50/25 backdrop-blur-md border border-yellow-200/35 shadow-xl;
+    @apply bg-yellow-50/40 backdrop-blur-lg border border-yellow-200/50 shadow-xl;
   }
 
   .glass-header {
-    @apply bg-white/25 backdrop-blur-lg border-b border-white/25;
+    @apply bg-white/35 backdrop-blur-xl border-b border-white/40 shadow-lg;
   }
 
   .glass-button {
-    @apply bg-white/15 hover:bg-white/25 backdrop-blur-sm border border-white/30 transition-all duration-300;
+    @apply bg-white/25 hover:bg-white/35 backdrop-blur-md border border-white/40 transition-all duration-300 shadow-md;
   }
 
   .photo-credit {
@@ -148,16 +136,17 @@
     bottom: 10px;
     right: 10px;
     font-size: 10px;
-    color: rgba(255, 255, 255, 0.7);
-    background: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.4);
     padding: 4px 8px;
     border-radius: 4px;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(8px);
     z-index: 1000;
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   .photo-credit a {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 1);
     text-decoration: none;
   }
 
