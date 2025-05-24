@@ -40,7 +40,7 @@ export default function RepoPage({ params }: RepoPageProps) {
         </div>
       </header>
 
-      <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+      <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8 pb-12 md:pb-16">
         <Suspense fallback={<Skeleton className="h-[100px] w-full bg-gray-200/50" />}>
           <RepoHeader owner={owner} name={name} />
         </Suspense>
