@@ -72,7 +72,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image: url("/images/forest-background.jpg");
+    background-image: url("/images/mountain-background.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -88,7 +88,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.88);
     backdrop-filter: blur(1px);
     z-index: -1;
   }
@@ -148,8 +148,8 @@
     bottom: 10px;
     right: 10px;
     font-size: 10px;
-    color: rgba(255, 255, 255, 0.6);
-    background: rgba(0, 0, 0, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(0, 0, 0, 0.3);
     padding: 4px 8px;
     border-radius: 4px;
     backdrop-filter: blur(4px);
@@ -157,7 +157,7 @@
   }
 
   .photo-credit a {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
   }
 

@@ -162,15 +162,15 @@ export default function DashboardPage() {
       <div className="photo-credit">
         Photo by{" "}
         <a
-          href="https://unsplash.com/@saveri?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+          href="https://unsplash.com/@lison?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Rajesh Kavasseri
+          Lison Zhao
         </a>{" "}
         on{" "}
         <a
-          href="https://unsplash.com/photos/MIpA5-W7Qbk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+          href="https://unsplash.com/photos/mxi4J3b9ClU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
           target="_blank"
           rel="noopener noreferrer"
         >
