@@ -93,18 +93,27 @@ export function RepoStarChart({ className, ...props }: RepoStarChartProps) {
               <stop offset="95%" stopColor="#000000" stopOpacity={0.1} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" stroke="#374151" strokeWidth={1} />
+          <XAxis
+            dataKey="name"
+            tick={{ fill: "#111827", fontSize: 12, fontWeight: "bold" }}
+            axisLine={{ stroke: "#374151", strokeWidth: 2 }}
+            tickLine={{ stroke: "#374151", strokeWidth: 2 }}
+          />
+          <YAxis
+            tick={{ fill: "#111827", fontSize: 12, fontWeight: "bold" }}
+            axisLine={{ stroke: "#374151", strokeWidth: 2 }}
+            tickLine={{ stroke: "#374151", strokeWidth: 2 }}
+          />
           <Tooltip
             content={({ active, payload, label }) => {
               if (active && payload && payload.length) {
                 return (
-                  <Card className="p-2 shadow-lg border">
-                    <div className="font-bold">{label}</div>
+                  <Card className="p-3 shadow-xl border bg-white/90 backdrop-blur-md">
+                    <div className="font-bold text-gray-900 mb-2">{label}</div>
                     {payload.map((entry, index) => (
-                      <div key={`item-${index}`} style={{ color: entry.color }}>
-                        {entry.name}: {entry.value.toLocaleString()} stars
+                      <div key={`item-${index}`} style={{ color: entry.color }} className="font-semibold">
+                        {entry.name}: {entry.value?.toLocaleString()} stars
                       </div>
                     ))}
                   </Card>
@@ -113,9 +122,23 @@ export function RepoStarChart({ className, ...props }: RepoStarChartProps) {
               return null
             }}
           />
-          <Area type="monotone" dataKey="next.js" stroke="#0070f3" fillOpacity={1} fill="url(#colorNextjs)" />
-          <Area type="monotone" dataKey="react" stroke="#61dafb" fillOpacity={1} fill="url(#colorReact)" />
-          <Area type="monotone" dataKey="v0" stroke="#000000" fillOpacity={1} fill="url(#colorV0)" />
+          <Area
+            type="monotone"
+            dataKey="next.js"
+            stroke="#0070f3"
+            strokeWidth={3}
+            fillOpacity={1}
+            fill="url(#colorNextjs)"
+          />
+          <Area
+            type="monotone"
+            dataKey="react"
+            stroke="#61dafb"
+            strokeWidth={3}
+            fillOpacity={1}
+            fill="url(#colorReact)"
+          />
+          <Area type="monotone" dataKey="v0" stroke="#000000" strokeWidth={3} fillOpacity={1} fill="url(#colorV0)" />
         </AreaChart>
       </ResponsiveContainer>
     </div>

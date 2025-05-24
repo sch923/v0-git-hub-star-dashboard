@@ -92,6 +92,34 @@ export function RepoDetailChart({ owner, name, type, className, ...props }: Repo
     )
   }
 
+  const axisProps = {
+    tick: { fill: "#111827", fontSize: 12, fontWeight: "bold" },
+    axisLine: { stroke: "#374151", strokeWidth: 2 },
+    tickLine: { stroke: "#374151", strokeWidth: 2 },
+  }
+
+  const gridProps = {
+    strokeDasharray: "3 3",
+    stroke: "#374151",
+    strokeWidth: 1,
+  }
+
+  const tooltipContent = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <Card className="p-3 shadow-xl border bg-white/90 backdrop-blur-md">
+          <div className="font-bold text-gray-900 mb-2">{label}</div>
+          {payload.map((entry: any, index: number) => (
+            <div key={`item-${index}`} style={{ color: entry.color }} className="font-semibold">
+              {entry.name}: {entry.value?.toLocaleString()}
+            </div>
+          ))}
+        </Card>
+      )
+    }
+    return null
+  }
+
   const renderChart = () => {
     switch (type) {
       case "stars":
@@ -103,23 +131,18 @@ export function RepoDetailChart({ owner, name, type, className, ...props }: Repo
                 <stop offset="95%" stopColor="#0070f3" stopOpacity={0.1} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip
-              content={({ active, payload, label }) => {
-                if (active && payload && payload.length) {
-                  return (
-                    <Card className="p-2 shadow-lg border">
-                      <div className="font-bold">{label}</div>
-                      <div style={{ color: "#0070f3" }}>Stars: {payload[0].value.toLocaleString()}</div>
-                    </Card>
-                  )
-                }
-                return null
-              }}
+            <CartesianGrid {...gridProps} />
+            <XAxis dataKey="name" {...axisProps} />
+            <YAxis {...axisProps} />
+            <Tooltip content={tooltipContent} />
+            <Area
+              type="monotone"
+              dataKey="stars"
+              stroke="#0070f3"
+              strokeWidth={3}
+              fillOpacity={1}
+              fill="url(#colorStars)"
             />
-            <Area type="monotone" dataKey="stars" stroke="#0070f3" fillOpacity={1} fill="url(#colorStars)" />
           </AreaChart>
         )
       case "forks":
@@ -131,79 +154,54 @@ export function RepoDetailChart({ owner, name, type, className, ...props }: Repo
                 <stop offset="95%" stopColor="#2563eb" stopOpacity={0.1} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip
-              content={({ active, payload, label }) => {
-                if (active && payload && payload.length) {
-                  return (
-                    <Card className="p-2 shadow-lg border">
-                      <div className="font-bold">{label}</div>
-                      <div style={{ color: "#2563eb" }}>Forks: {payload[0].value.toLocaleString()}</div>
-                    </Card>
-                  )
-                }
-                return null
-              }}
+            <CartesianGrid {...gridProps} />
+            <XAxis dataKey="name" {...axisProps} />
+            <YAxis {...axisProps} />
+            <Tooltip content={tooltipContent} />
+            <Area
+              type="monotone"
+              dataKey="forks"
+              stroke="#2563eb"
+              strokeWidth={3}
+              fillOpacity={1}
+              fill="url(#colorForks)"
             />
-            <Area type="monotone" dataKey="forks" stroke="#2563eb" fillOpacity={1} fill="url(#colorForks)" />
           </AreaChart>
         )
       case "issues":
         return (
           <LineChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip
-              content={({ active, payload, label }) => {
-                if (active && payload && payload.length) {
-                  return (
-                    <Card className="p-2 shadow-lg border">
-                      <div className="font-bold">{label}</div>
-                      {payload.map((entry, index) => (
-                        <div key={`item-${index}`} style={{ color: entry.color }}>
-                          {entry.name}: {entry.value.toLocaleString()}
-                        </div>
-                      ))}
-                    </Card>
-                  )
-                }
-                return null
+            <CartesianGrid {...gridProps} />
+            <XAxis dataKey="name" {...axisProps} />
+            <YAxis {...axisProps} />
+            <Tooltip content={tooltipContent} />
+            <Legend
+              wrapperStyle={{
+                color: "#111827",
+                fontWeight: "bold",
+                fontSize: "12px",
               }}
             />
-            <Legend />
-            <Line type="monotone" dataKey="openIssues" stroke="#f97316" name="Open Issues" />
-            <Line type="monotone" dataKey="closedIssues" stroke="#84cc16" name="Closed Issues" />
-            <Line type="monotone" dataKey="openPRs" stroke="#8b5cf6" name="Open PRs" />
-            <Line type="monotone" dataKey="closedPRs" stroke="#14b8a6" name="Closed PRs" />
+            <Line type="monotone" dataKey="openIssues" stroke="#f97316" strokeWidth={3} name="Open Issues" />
+            <Line type="monotone" dataKey="closedIssues" stroke="#84cc16" strokeWidth={3} name="Closed Issues" />
+            <Line type="monotone" dataKey="openPRs" stroke="#8b5cf6" strokeWidth={3} name="Open PRs" />
+            <Line type="monotone" dataKey="closedPRs" stroke="#14b8a6" strokeWidth={3} name="Closed PRs" />
           </LineChart>
         )
       case "activity":
         return (
           <BarChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip
-              content={({ active, payload, label }) => {
-                if (active && payload && payload.length) {
-                  return (
-                    <Card className="p-2 shadow-lg border">
-                      <div className="font-bold">{label}</div>
-                      {payload.map((entry, index) => (
-                        <div key={`item-${index}`} style={{ color: entry.color }}>
-                          {entry.name}: {entry.value.toLocaleString()}
-                        </div>
-                      ))}
-                    </Card>
-                  )
-                }
-                return null
+            <CartesianGrid {...gridProps} />
+            <XAxis dataKey="name" {...axisProps} />
+            <YAxis {...axisProps} />
+            <Tooltip content={tooltipContent} />
+            <Legend
+              wrapperStyle={{
+                color: "#111827",
+                fontWeight: "bold",
+                fontSize: "12px",
               }}
             />
-            <Legend />
             <Bar dataKey="commits" fill="#0070f3" name="Commits" />
             <Bar dataKey="issues" fill="#f97316" name="Issues" />
             <Bar dataKey="pullRequests" fill="#8b5cf6" name="Pull Requests" />
