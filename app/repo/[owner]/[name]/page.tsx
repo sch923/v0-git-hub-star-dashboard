@@ -194,15 +194,15 @@ export default function RepoPage({ params }: RepoPageProps) {
       <div className="photo-credit">
         Photo by{" "}
         <a
-          href="https://unsplash.com/@lison?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+          href="https://unsplash.com/@neotronimz?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Lison Zhao
+          Nirmal Rajendharkumar
         </a>{" "}
         on{" "}
         <a
-          href="https://unsplash.com/photos/mxi4J3b9ClU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+          href="https://unsplash.com/photos/43gGq3BhphM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
           target="_blank"
           rel="noopener noreferrer"
         >
