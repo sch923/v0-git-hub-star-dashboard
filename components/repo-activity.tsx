@@ -1,6 +1,10 @@
 "use client"
 
-import { GitCommitIcon, GitPullRequestIcon, FolderOpenIcon as IssueOpenedIcon } from "lucide-react"
+import {
+  GitCommitIcon,
+  GitPullRequestIcon,
+  FolderOpenIcon as IssueOpenedIcon,
+} from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 
@@ -124,17 +128,32 @@ export function RepoActivity({ owner, name }: RepoActivityProps) {
   }
 
   return (
-    <div className="space-y-4">
+    <div>
       {activities.map((activity, index) => (
-        <div key={index} className="flex items-start gap-4 pb-4 border-b last:border-0">
+        <div
+          key={index}
+          className="flex items-start gap-4 p-4 border-b last:border-0 hover:bg-white/60"
+        >
           <Avatar className="h-8 w-8">
-            <AvatarImage src={activity.user.avatar_url || "/placeholder.svg"} alt={activity.user.login} />
-            <AvatarFallback>{activity.user.login.slice(0, 2).toUpperCase()}</AvatarFallback>
+            <AvatarImage
+              src={activity.user.avatar_url || "/placeholder.svg"}
+              alt={activity.user.login}
+            />
+            <AvatarFallback>
+              {activity.user.login.slice(0, 2).toUpperCase()}
+            </AvatarFallback>
           </Avatar>
           <div className="flex-1 space-y-1">
             <div className="flex items-center gap-2">
-              <span className="text-muted-foreground">{getActivityIcon(activity.type)}</span>
-              <a href={activity.url} target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">
+              <span className="text-muted-foreground">
+                {getActivityIcon(activity.type)}
+              </span>
+              <a
+                href={activity.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium hover:underline"
+              >
                 {activity.title}
               </a>
               {getStatusBadge(activity)}
