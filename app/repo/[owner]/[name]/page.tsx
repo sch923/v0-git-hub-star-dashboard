@@ -50,34 +50,34 @@ export default function RepoPage({ params }: RepoPageProps) {
         </Suspense>
 
         <Tabs defaultValue="overview" className="space-y-4">
-          <TabsList className="bg-white/10 backdrop-blur-sm border border-white/15">
+          <TabsList className="bg-white/10 backdrop-blur-sm border border-white/20">
             <TabsTrigger
               value="overview"
-              className="text-gray-600 data-[state=active]:bg-white/20 data-[state=active]:text-gray-800"
+              className="text-gray-600 data-[state=active]:bg-white/25 data-[state=active]:text-gray-800"
             >
               Overview
             </TabsTrigger>
             <TabsTrigger
               value="stars"
-              className="text-gray-600 data-[state=active]:bg-white/20 data-[state=active]:text-gray-800"
+              className="text-gray-600 data-[state=active]:bg-white/25 data-[state=active]:text-gray-800"
             >
               Stars
             </TabsTrigger>
             <TabsTrigger
               value="forks"
-              className="text-gray-600 data-[state=active]:bg-white/20 data-[state=active]:text-gray-800"
+              className="text-gray-600 data-[state=active]:bg-white/25 data-[state=active]:text-gray-800"
             >
               Forks
             </TabsTrigger>
             <TabsTrigger
               value="issues"
-              className="text-gray-600 data-[state=active]:bg-white/20 data-[state=active]:text-gray-800"
+              className="text-gray-600 data-[state=active]:bg-white/25 data-[state=active]:text-gray-800"
             >
               Issues & PRs
             </TabsTrigger>
             <TabsTrigger
               value="contributors"
-              className="text-gray-600 data-[state=active]:bg-white/20 data-[state=active]:text-gray-800"
+              className="text-gray-600 data-[state=active]:bg-white/25 data-[state=active]:text-gray-800"
             >
               Contributors
             </TabsTrigger>

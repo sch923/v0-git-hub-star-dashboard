@@ -70,12 +70,12 @@ export function RepoTable({ sortBy = "stars" }: RepoTableProps) {
         </TableHeader>
         <TableBody>
           {sortedRepos.map((repo) => (
-            <TableRow key={`${repo.owner}/${repo.name}`} className="border-white/5 hover:bg-white/8 transition-colors">
+            <TableRow key={`${repo.owner}/${repo.name}`} className="border-white/5 hover:bg-white/10 transition-colors">
               <TableCell>
                 <Link href={`/repo/${repo.owner}/${repo.name}`} className="hover:underline">
                   <div className="font-medium text-gray-800">{repo.name}</div>
                   <div className="text-sm text-gray-600">{repo.owner}</div>
-                  <Badge variant="outline" className="mt-1 bg-blue-50/50 border-blue-200/50 text-blue-700">
+                  <Badge variant="outline" className="mt-1 bg-blue-50/75 border-blue-200/75 text-blue-700">
                     {repo.language}
                   </Badge>
                 </Link>
@@ -88,7 +88,7 @@ export function RepoTable({ sortBy = "stars" }: RepoTableProps) {
               </TableCell>
               {sortBy === "growth" && (
                 <TableCell className="text-right">
-                  <Badge variant="outline" className="bg-green-50/50 border-green-200/50 text-green-700">
+                  <Badge variant="outline" className="bg-green-50/75 border-green-200/75 text-green-700">
                     +{repo.growth.toLocaleString()} this week
                   </Badge>
                 </TableCell>

@@ -39,11 +39,11 @@ export function RepoHeader({ owner, name }: RepoHeaderProps) {
             <h1 className="text-2xl font-bold tracking-tight text-gray-800 drop-shadow-sm">
               {repo.owner.login}/{repo.name}
             </h1>
-            <Badge variant="outline" className="bg-blue-50/50 border-blue-200/50 text-blue-700">
+            <Badge variant="outline" className="bg-blue-50/75 border-blue-200/75 text-blue-700">
               {repo.language}
             </Badge>
             {repo.license && (
-              <Badge variant="outline" className="bg-green-50/50 border-green-200/50 text-green-700">
+              <Badge variant="outline" className="bg-green-50/75 border-green-200/75 text-green-700">
                 {repo.license}
               </Badge>
             )}
@@ -51,7 +51,7 @@ export function RepoHeader({ owner, name }: RepoHeaderProps) {
           <p className="text-gray-700">{repo.description}</p>
           <div className="flex flex-wrap gap-2">
             {repo.topics.map((topic) => (
-              <Badge key={topic} variant="outline" className="bg-purple-50/50 border-purple-200/50 text-purple-700">
+              <Badge key={topic} variant="outline" className="bg-purple-50/75 border-purple-200/75 text-purple-700">
                 {topic}
               </Badge>
             ))}

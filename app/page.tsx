@@ -128,16 +128,16 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent>
               <Tabs defaultValue="stars" className="glass-tabs">
-                <TabsList className="mb-4 bg-white/10 backdrop-blur-sm border border-white/15">
+                <TabsList className="mb-4 bg-white/10 backdrop-blur-sm border border-white/20">
                   <TabsTrigger
                     value="stars"
-                    className="text-gray-600 data-[state=active]:bg-white/20 data-[state=active]:text-gray-800"
+                    className="text-gray-600 data-[state=active]:bg-white/25 data-[state=active]:text-gray-800"
                   >
                     Stars
                   </TabsTrigger>
                   <TabsTrigger
                     value="growth"
-                    className="text-gray-600 data-[state=active]:bg-white/20 data-[state=active]:text-gray-800"
+                    className="text-gray-600 data-[state=active]:bg-white/25 data-[state=active]:text-gray-800"
                   >
                     Growth
                   </TabsTrigger>
