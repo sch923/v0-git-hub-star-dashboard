@@ -36,40 +36,40 @@ export function RepoHeader({ owner, name }: RepoHeaderProps) {
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold tracking-tight text-white drop-shadow-lg">
+            <h1 className="text-2xl font-bold tracking-tight text-gray-800 drop-shadow-sm">
               {repo.owner.login}/{repo.name}
             </h1>
-            <Badge variant="outline" className="bg-blue-500/20 border-blue-400/30 text-blue-200">
+            <Badge variant="outline" className="bg-blue-50/50 border-blue-200/50 text-blue-700">
               {repo.language}
             </Badge>
             {repo.license && (
-              <Badge variant="outline" className="bg-green-500/20 border-green-400/30 text-green-200">
+              <Badge variant="outline" className="bg-green-50/50 border-green-200/50 text-green-700">
                 {repo.license}
               </Badge>
             )}
           </div>
-          <p className="text-white/80">{repo.description}</p>
+          <p className="text-gray-700">{repo.description}</p>
           <div className="flex flex-wrap gap-2">
             {repo.topics.map((topic) => (
-              <Badge key={topic} variant="outline" className="bg-purple-500/20 border-purple-400/30 text-purple-200">
+              <Badge key={topic} variant="outline" className="bg-purple-50/50 border-purple-200/50 text-purple-700">
                 {topic}
               </Badge>
             ))}
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Button className="glass-button text-white hover:text-white gap-1">
-            <StarIcon className="h-4 w-4 text-yellow-300" />
+          <Button className="glass-button text-gray-700 hover:text-gray-800 gap-1">
+            <StarIcon className="h-4 w-4 text-yellow-500" />
             Star
-            <span className="ml-1 text-xs text-white/70">{repo.stars.toLocaleString()}</span>
+            <span className="ml-1 text-xs text-gray-600">{repo.stars.toLocaleString()}</span>
           </Button>
-          <Button className="glass-button text-white hover:text-white gap-1">
+          <Button className="glass-button text-gray-700 hover:text-gray-800 gap-1">
             <GitForkIcon className="h-4 w-4" />
             Fork
-            <span className="ml-1 text-xs text-white/70">{repo.forks.toLocaleString()}</span>
+            <span className="ml-1 text-xs text-gray-600">{repo.forks.toLocaleString()}</span>
           </Button>
           {repo.homepage && (
-            <Button size="icon" className="glass-button text-white hover:text-white" asChild>
+            <Button size="icon" className="glass-button text-gray-700 hover:text-gray-800" asChild>
               <a href={repo.homepage} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-4 w-4" />
                 <span className="sr-only">Visit homepage</span>

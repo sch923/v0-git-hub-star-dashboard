@@ -10,11 +10,11 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export default function DashboardPage() {
   return (
-    <div className="flex min-h-screen w-full flex-col">
+    <div className="flex min-h-screen w-full flex-col relative">
       <header className="sticky top-0 z-10 flex h-16 items-center gap-4 glass-header px-4 md:px-6">
-        <div className="flex items-center gap-2 font-semibold text-white drop-shadow-lg">
-          <StarIcon className="h-5 w-5 text-yellow-300 drop-shadow-lg" />
-          <span className="bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
+        <div className="flex items-center gap-2 font-semibold text-gray-700 drop-shadow-sm">
+          <StarIcon className="h-5 w-5 text-yellow-500 drop-shadow-sm" />
+          <span className="bg-gradient-to-r from-gray-700 to-gray-600 bg-clip-text text-transparent">
             GitHub Stars Dashboard
           </span>
         </div>
@@ -24,7 +24,7 @@ export default function DashboardPage() {
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
           <Card className="glass-card border-0">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-white/90">Total Repositories</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-700">Total Repositories</CardTitle>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -33,31 +33,31 @@ export default function DashboardPage() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                className="h-4 w-4 text-white/70"
+                className="h-4 w-4 text-gray-500"
               >
                 <path d="M12 2v20M2 12h20" />
               </svg>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white drop-shadow-lg">12</div>
-              <p className="text-xs text-white/70">+2 from last month</p>
+              <div className="text-2xl font-bold text-gray-800 drop-shadow-sm">12</div>
+              <p className="text-xs text-gray-600">+2 from last month</p>
             </CardContent>
           </Card>
 
           <Card className="glass-card border-0">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-white/90">Total Stars</CardTitle>
-              <StarIcon className="h-4 w-4 text-yellow-300 drop-shadow-lg" />
+              <CardTitle className="text-sm font-medium text-gray-700">Total Stars</CardTitle>
+              <StarIcon className="h-4 w-4 text-yellow-500 drop-shadow-sm" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white drop-shadow-lg">45,231</div>
-              <p className="text-xs text-white/70">+2.5% from last month</p>
+              <div className="text-2xl font-bold text-gray-800 drop-shadow-sm">45,231</div>
+              <p className="text-xs text-gray-600">+2.5% from last month</p>
             </CardContent>
           </Card>
 
           <Card className="glass-card border-0">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-white/90">Most Starred</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-700">Most Starred</CardTitle>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -66,21 +66,21 @@ export default function DashboardPage() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                className="h-4 w-4 text-white/70"
+                className="h-4 w-4 text-gray-500"
               >
                 <rect width="20" height="14" x="2" y="5" rx="2" />
                 <path d="M2 10h20" />
               </svg>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white drop-shadow-lg">next.js</div>
-              <p className="text-xs text-white/70">112,345 stars</p>
+              <div className="text-2xl font-bold text-gray-800 drop-shadow-sm">next.js</div>
+              <p className="text-xs text-gray-600">112,345 stars</p>
             </CardContent>
           </Card>
 
           <Card className="glass-card border-0">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-white/90">Fastest Growing</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-700">Fastest Growing</CardTitle>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -89,14 +89,14 @@ export default function DashboardPage() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                className="h-4 w-4 text-white/70"
+                className="h-4 w-4 text-gray-500"
               >
                 <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
               </svg>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white drop-shadow-lg">v0</div>
-              <p className="text-xs text-white/70">+1,234 this week</p>
+              <div className="text-2xl font-bold text-gray-800 drop-shadow-sm">v0</div>
+              <p className="text-xs text-gray-600">+1,234 this week</p>
             </CardContent>
           </Card>
         </div>
@@ -105,8 +105,8 @@ export default function DashboardPage() {
           <Card className="xl:col-span-2 glass-card border-0">
             <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
-                <CardTitle className="text-white/90">Star History</CardTitle>
-                <CardDescription className="text-white/70">
+                <CardTitle className="text-gray-800">Star History</CardTitle>
+                <CardDescription className="text-gray-600">
                   Star count over time for selected repositories
                 </CardDescription>
               </div>
@@ -114,7 +114,7 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent className="p-0 pt-4">
               <div className="h-[350px] md:h-[400px]">
-                <Suspense fallback={<Skeleton className="h-full w-full bg-white/10" />}>
+                <Suspense fallback={<Skeleton className="h-full w-full bg-gray-200/50" />}>
                   <RepoStarChart className="h-full" />
                 </Suspense>
               </div>
@@ -123,32 +123,32 @@ export default function DashboardPage() {
 
           <Card className="xl:col-span-1 glass-card border-0">
             <CardHeader>
-              <CardTitle className="text-white/90">Top Repositories</CardTitle>
-              <CardDescription className="text-white/70">Your most starred repositories</CardDescription>
+              <CardTitle className="text-gray-800">Top Repositories</CardTitle>
+              <CardDescription className="text-gray-600">Your most starred repositories</CardDescription>
             </CardHeader>
             <CardContent>
               <Tabs defaultValue="stars" className="glass-tabs">
-                <TabsList className="mb-4 bg-white/10 backdrop-blur-md border border-white/20">
+                <TabsList className="mb-4 bg-white/10 backdrop-blur-sm border border-white/15">
                   <TabsTrigger
                     value="stars"
-                    className="text-white/80 data-[state=active]:bg-white/20 data-[state=active]:text-white"
+                    className="text-gray-600 data-[state=active]:bg-white/20 data-[state=active]:text-gray-800"
                   >
                     Stars
                   </TabsTrigger>
                   <TabsTrigger
                     value="growth"
-                    className="text-white/80 data-[state=active]:bg-white/20 data-[state=active]:text-white"
+                    className="text-gray-600 data-[state=active]:bg-white/20 data-[state=active]:text-gray-800"
                   >
                     Growth
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="stars">
-                  <Suspense fallback={<Skeleton className="h-[350px] w-full bg-white/10" />}>
+                  <Suspense fallback={<Skeleton className="h-[350px] w-full bg-gray-200/50" />}>
                     <RepoTable />
                   </Suspense>
                 </TabsContent>
                 <TabsContent value="growth">
-                  <Suspense fallback={<Skeleton className="h-[350px] w-full bg-white/10" />}>
+                  <Suspense fallback={<Skeleton className="h-[350px] w-full bg-gray-200/50" />}>
                     <RepoTable sortBy="growth" />
                   </Suspense>
                 </TabsContent>
