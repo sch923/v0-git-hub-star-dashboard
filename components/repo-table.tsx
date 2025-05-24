@@ -59,14 +59,14 @@ export function RepoTable({ sortBy = "stars" }: RepoTableProps) {
   })
 
   return (
-    <div className="glass rounded-lg overflow-hidden">
+    <div className="bg-white/30 backdrop-blur-md rounded-lg overflow-hidden border border-white/40 shadow-lg">
       <Table>
         <TableHeader>
-          <TableRow className="border-white/20 hover:bg-white/10">
-            <TableHead className="text-gray-800 font-semibold drop-shadow-sm">Repository</TableHead>
-            <TableHead className="text-right text-gray-800 font-semibold drop-shadow-sm">Stars</TableHead>
+          <TableRow className="border-white/30 hover:bg-white/20">
+            <TableHead className="text-gray-900 font-bold drop-shadow-sm">Repository</TableHead>
+            <TableHead className="text-right text-gray-900 font-bold drop-shadow-sm">Stars</TableHead>
             {sortBy === "growth" && (
-              <TableHead className="text-right text-gray-800 font-semibold drop-shadow-sm">Growth</TableHead>
+              <TableHead className="text-right text-gray-900 font-bold drop-shadow-sm">Growth</TableHead>
             )}
           </TableRow>
         </TableHeader>
@@ -74,26 +74,26 @@ export function RepoTable({ sortBy = "stars" }: RepoTableProps) {
           {sortedRepos.map((repo) => (
             <TableRow
               key={`${repo.owner}/${repo.name}`}
-              className="border-white/10 hover:bg-white/15 transition-colors"
+              className="border-white/20 hover:bg-white/25 transition-colors"
             >
               <TableCell>
                 <Link href={`/repo/${repo.owner}/${repo.name}`} className="hover:underline">
-                  <div className="font-medium text-gray-900 drop-shadow-sm">{repo.name}</div>
-                  <div className="text-sm text-gray-700 drop-shadow-sm">{repo.owner}</div>
-                  <Badge variant="outline" className="mt-1 bg-blue-50/75 border-blue-200/75 text-blue-800">
+                  <div className="font-bold text-gray-900 drop-shadow-sm">{repo.name}</div>
+                  <div className="text-sm text-gray-800 drop-shadow-sm font-medium">{repo.owner}</div>
+                  <Badge variant="outline" className="mt-1 bg-blue-50/80 border-blue-300/80 text-blue-900 font-medium">
                     {repo.language}
                   </Badge>
                 </Link>
               </TableCell>
               <TableCell className="text-right">
                 <div className="flex items-center justify-end gap-1">
-                  <span className="text-gray-900 font-semibold drop-shadow-sm">{repo.stars.toLocaleString()}</span>
+                  <span className="text-gray-900 font-bold drop-shadow-sm">{repo.stars.toLocaleString()}</span>
                   <StarIcon className="h-4 w-4 text-yellow-600 drop-shadow-sm" />
                 </div>
               </TableCell>
               {sortBy === "growth" && (
                 <TableCell className="text-right">
-                  <Badge variant="outline" className="bg-green-50/75 border-green-200/75 text-green-800">
+                  <Badge variant="outline" className="bg-green-50/80 border-green-300/80 text-green-900 font-medium">
                     +{repo.growth.toLocaleString()} this week
                   </Badge>
                 </TableCell>

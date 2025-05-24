@@ -28,9 +28,13 @@ export function SearchForm({ className, ...props }: SearchFormProps) {
         placeholder="Search repositories..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="w-full bg-white/10 backdrop-blur-sm border-white/25 text-gray-700 placeholder:text-gray-500 focus:bg-white/20 transition-all duration-300"
+        className="w-full bg-white/25 backdrop-blur-md border-white/40 text-gray-900 placeholder:text-gray-700 focus:bg-white/35 transition-all duration-300 font-medium drop-shadow-sm"
       />
-      <Button type="submit" size="icon" className="glass-button text-gray-700 hover:text-gray-800">
+      <Button
+        type="submit"
+        size="icon"
+        className="bg-white/25 hover:bg-white/35 backdrop-blur-md border border-white/40 text-gray-900 hover:text-gray-900 transition-all duration-300 shadow-md"
+      >
         <SearchIcon className="h-4 w-4" />
         <span className="sr-only">Search</span>
       </Button>

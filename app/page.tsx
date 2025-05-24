@@ -102,11 +102,11 @@ export default function DashboardPage() {
         </div>
 
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
-          <Card className="xl:col-span-2 glass-card-indigo border-0">
+          <Card className="xl:col-span-2 bg-transparent border-0 shadow-none">
             <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
-                <CardTitle className="text-gray-900 drop-shadow-sm">Star History</CardTitle>
-                <CardDescription className="text-gray-700 drop-shadow-sm">
+                <CardTitle className="text-gray-900 drop-shadow-md text-lg font-bold">Star History</CardTitle>
+                <CardDescription className="text-gray-800 drop-shadow-sm font-medium">
                   Star count over time for selected repositories
                 </CardDescription>
               </div>
@@ -121,10 +121,12 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="xl:col-span-1 glass-card-teal border-0">
+          <Card className="xl:col-span-1 bg-transparent border-0 shadow-none">
             <CardHeader>
-              <CardTitle className="text-gray-900 drop-shadow-sm">Top Repositories</CardTitle>
-              <CardDescription className="text-gray-700 drop-shadow-sm">Your most starred repositories</CardDescription>
+              <CardTitle className="text-gray-900 drop-shadow-md text-lg font-bold">Top Repositories</CardTitle>
+              <CardDescription className="text-gray-800 drop-shadow-sm font-medium">
+                Your most starred repositories
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <Tabs defaultValue="stars" className="glass-tabs">
