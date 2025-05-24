@@ -35,7 +35,7 @@ export function RepoStatsGrid({ owner, name }: RepoStatsGridProps) {
 
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-      <Card>
+      <Card className="glass-card-yellow border-0">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Stars</CardTitle>
           <StarIcon className="h-4 w-4 text-yellow-400" />
@@ -45,50 +45,50 @@ export function RepoStatsGrid({ owner, name }: RepoStatsGridProps) {
           <p className="text-xs text-muted-foreground">{stats.starsGrowth}</p>
         </CardContent>
       </Card>
-      <Card>
+      <Card className="glass-card-blue border-0">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Forks</CardTitle>
-          <GitForkIcon className="h-4 w-4 text-muted-foreground" />
+          <GitForkIcon className="h-4 w-4 text-blue-500" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{stats.forks.toLocaleString()}</div>
           <p className="text-xs text-muted-foreground">Fork ratio: {((stats.forks / stats.stars) * 100).toFixed(1)}%</p>
         </CardContent>
       </Card>
-      <Card>
+      <Card className="glass-card-orange border-0">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Issues</CardTitle>
-          <IssueOpenedIcon className="h-4 w-4 text-muted-foreground" />
+          <IssueOpenedIcon className="h-4 w-4 text-orange-500" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{stats.issues.toLocaleString()}</div>
           <p className="text-xs text-muted-foreground">{stats.pullRequests} open PRs</p>
         </CardContent>
       </Card>
-      <Card>
+      <Card className="glass-card-green border-0">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Contributors</CardTitle>
-          <UsersIcon className="h-4 w-4 text-muted-foreground" />
+          <UsersIcon className="h-4 w-4 text-green-500" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{stats.contributors.toLocaleString()}</div>
           <p className="text-xs text-muted-foreground">Active community</p>
         </CardContent>
       </Card>
-      <Card>
+      <Card className="glass-card-purple border-0">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Commits</CardTitle>
-          <CodeIcon className="h-4 w-4 text-muted-foreground" />
+          <CodeIcon className="h-4 w-4 text-purple-500" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{stats.commits.toLocaleString()}</div>
           <p className="text-xs text-muted-foreground">Total commits</p>
         </CardContent>
       </Card>
-      <Card>
+      <Card className="glass-card-indigo border-0">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Last Updated</CardTitle>
-          <CalendarIcon className="h-4 w-4 text-muted-foreground" />
+          <CalendarIcon className="h-4 w-4 text-indigo-500" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{stats.lastUpdated}</div>

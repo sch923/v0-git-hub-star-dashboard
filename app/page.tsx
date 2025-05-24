@@ -22,7 +22,7 @@ export default function DashboardPage() {
 
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-          <Card className="glass-card border-0">
+          <Card className="glass-card-blue border-0">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-gray-700">Total Repositories</CardTitle>
               <svg
@@ -33,7 +33,7 @@ export default function DashboardPage() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                className="h-4 w-4 text-gray-500"
+                className="h-4 w-4 text-blue-500"
               >
                 <path d="M12 2v20M2 12h20" />
               </svg>
@@ -44,7 +44,7 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass-card border-0">
+          <Card className="glass-card-yellow border-0">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-gray-700">Total Stars</CardTitle>
               <StarIcon className="h-4 w-4 text-yellow-500 drop-shadow-sm" />
@@ -55,7 +55,7 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass-card border-0">
+          <Card className="glass-card-purple border-0">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-gray-700">Most Starred</CardTitle>
               <svg
@@ -66,7 +66,7 @@ export default function DashboardPage() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                className="h-4 w-4 text-gray-500"
+                className="h-4 w-4 text-purple-500"
               >
                 <rect width="20" height="14" x="2" y="5" rx="2" />
                 <path d="M2 10h20" />
@@ -78,7 +78,7 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass-card border-0">
+          <Card className="glass-card-green border-0">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-gray-700">Fastest Growing</CardTitle>
               <svg
@@ -89,7 +89,7 @@ export default function DashboardPage() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                className="h-4 w-4 text-gray-500"
+                className="h-4 w-4 text-green-500"
               >
                 <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
               </svg>
@@ -102,7 +102,7 @@ export default function DashboardPage() {
         </div>
 
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
-          <Card className="xl:col-span-2 glass-card border-0">
+          <Card className="xl:col-span-2 glass-card-indigo border-0">
             <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
                 <CardTitle className="text-gray-800">Star History</CardTitle>
@@ -121,7 +121,7 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="xl:col-span-1 glass-card border-0">
+          <Card className="xl:col-span-1 glass-card-teal border-0">
             <CardHeader>
               <CardTitle className="text-gray-800">Top Repositories</CardTitle>
               <CardDescription className="text-gray-600">Your most starred repositories</CardDescription>

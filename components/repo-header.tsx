@@ -32,7 +32,7 @@ export function RepoHeader({ owner, name }: RepoHeaderProps) {
   const repo = getRepoData(owner, name)
 
   return (
-    <div className="glass-card border-0 p-6">
+    <div className="glass-card-teal border-0 p-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div className="space-y-2">
           <div className="flex items-center gap-2">

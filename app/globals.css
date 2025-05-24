@@ -93,6 +93,38 @@
     @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
   }
 
+  .glass-card-blue {
+    @apply bg-blue-50/20 backdrop-blur-md border border-blue-200/30 shadow-xl;
+  }
+
+  .glass-card-green {
+    @apply bg-green-50/20 backdrop-blur-md border border-green-200/30 shadow-xl;
+  }
+
+  .glass-card-purple {
+    @apply bg-purple-50/20 backdrop-blur-md border border-purple-200/30 shadow-xl;
+  }
+
+  .glass-card-orange {
+    @apply bg-orange-50/20 backdrop-blur-md border border-orange-200/30 shadow-xl;
+  }
+
+  .glass-card-pink {
+    @apply bg-pink-50/20 backdrop-blur-md border border-pink-200/30 shadow-xl;
+  }
+
+  .glass-card-indigo {
+    @apply bg-indigo-50/20 backdrop-blur-md border border-indigo-200/30 shadow-xl;
+  }
+
+  .glass-card-teal {
+    @apply bg-teal-50/20 backdrop-blur-md border border-teal-200/30 shadow-xl;
+  }
+
+  .glass-card-yellow {
+    @apply bg-yellow-50/20 backdrop-blur-md border border-yellow-200/30 shadow-xl;
+  }
+
   .glass-header {
     @apply bg-white/20 backdrop-blur-lg border-b border-white/20;
   }

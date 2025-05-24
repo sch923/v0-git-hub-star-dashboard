@@ -85,7 +85,7 @@ export default function RepoPage({ params }: RepoPageProps) {
 
           <TabsContent value="overview" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              <Card className="col-span-2 glass-card border-0">
+              <Card className="col-span-2 glass-card-blue border-0">
                 <CardHeader>
                   <CardTitle className="text-gray-800">Repository Activity</CardTitle>
                   <CardDescription className="text-gray-600">
@@ -100,7 +100,7 @@ export default function RepoPage({ params }: RepoPageProps) {
                   </div>
                 </CardContent>
               </Card>
-              <Card className="glass-card border-0">
+              <Card className="glass-card-green border-0">
                 <CardHeader>
                   <CardTitle className="text-gray-800">README</CardTitle>
                 </CardHeader>
@@ -111,7 +111,7 @@ export default function RepoPage({ params }: RepoPageProps) {
                 </CardContent>
               </Card>
             </div>
-            <Card className="glass-card border-0">
+            <Card className="glass-card-purple border-0">
               <CardHeader>
                 <CardTitle className="text-gray-800">Recent Activity</CardTitle>
                 <CardDescription className="text-gray-600">Latest commits, issues, and pull requests</CardDescription>
@@ -125,7 +125,7 @@ export default function RepoPage({ params }: RepoPageProps) {
           </TabsContent>
 
           <TabsContent value="stars" className="space-y-4">
-            <Card className="glass-card border-0">
+            <Card className="glass-card-yellow border-0">
               <CardHeader>
                 <CardTitle className="text-gray-800">Star History</CardTitle>
                 <CardDescription className="text-gray-600">Star count over time</CardDescription>
@@ -141,7 +141,7 @@ export default function RepoPage({ params }: RepoPageProps) {
           </TabsContent>
 
           <TabsContent value="forks" className="space-y-4">
-            <Card className="glass-card border-0">
+            <Card className="glass-card-indigo border-0">
               <CardHeader>
                 <CardTitle className="text-gray-800">Fork History</CardTitle>
                 <CardDescription className="text-gray-600">Fork count over time</CardDescription>
@@ -157,7 +157,7 @@ export default function RepoPage({ params }: RepoPageProps) {
           </TabsContent>
 
           <TabsContent value="issues" className="space-y-4">
-            <Card className="glass-card border-0">
+            <Card className="glass-card-orange border-0">
               <CardHeader>
                 <CardTitle className="text-gray-800">Issues & Pull Requests</CardTitle>
                 <CardDescription className="text-gray-600">
@@ -175,7 +175,7 @@ export default function RepoPage({ params }: RepoPageProps) {
           </TabsContent>
 
           <TabsContent value="contributors" className="space-y-4">
-            <Card className="glass-card border-0">
+            <Card className="glass-card-pink border-0">
               <CardHeader>
                 <CardTitle className="text-gray-800">Top Contributors</CardTitle>
                 <CardDescription className="text-gray-600">Most active contributors to this repository</CardDescription>
