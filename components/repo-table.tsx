@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { StarIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -70,11 +71,13 @@ export function RepoTable({ sortBy = "stars" }: RepoTableProps) {
         {sortedRepos.map((repo) => (
           <TableRow key={`${repo.owner}/${repo.name}`}>
             <TableCell>
-              <div className="font-medium">{repo.name}</div>
-              <div className="text-sm text-muted-foreground">{repo.owner}</div>
-              <Badge variant="outline" className="mt-1">
-                {repo.language}
-              </Badge>
+              <Link href={`/repo/${repo.owner}/${repo.name}`} className="hover:underline">
+                <div className="font-medium">{repo.name}</div>
+                <div className="text-sm text-muted-foreground">{repo.owner}</div>
+                <Badge variant="outline" className="mt-1">
+                  {repo.language}
+                </Badge>
+              </Link>
             </TableCell>
             <TableCell className="text-right">
               <div className="flex items-center justify-end gap-1">

@@ -103,10 +103,12 @@ export default function DashboardPage() {
               </div>
               <SearchForm className="ml-auto" />
             </CardHeader>
-            <CardContent>
-              <Suspense fallback={<Skeleton className="h-[350px] w-full" />}>
-                <RepoStarChart className="aspect-[4/3]" />
-              </Suspense>
+            <CardContent className="p-0 pt-4">
+              <div className="h-[350px] md:h-[400px]">
+                <Suspense fallback={<Skeleton className="h-full w-full" />}>
+                  <RepoStarChart className="h-full" />
+                </Suspense>
+              </div>
             </CardContent>
           </Card>
           <Card className="xl:col-span-1">
