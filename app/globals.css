@@ -72,64 +72,97 @@
   }
   body {
     @apply bg-background text-foreground;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.95) 0%,
-      rgba(248, 250, 252, 0.95) 25%,
-      rgba(241, 245, 249, 0.95) 50%,
-      rgba(248, 250, 252, 0.95) 75%,
-      rgba(255, 255, 255, 0.95) 100%
-    );
+    background-image: url("/images/forest-background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     min-height: 100vh;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(1px);
+    z-index: -1;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/5 backdrop-blur-sm border border-white/10 shadow-lg;
+    @apply bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg;
   }
 
   .glass-card {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
+    @apply bg-white/15 backdrop-blur-md border border-white/25 shadow-xl;
   }
 
   .glass-card-blue {
-    @apply bg-blue-50/20 backdrop-blur-md border border-blue-200/30 shadow-xl;
+    @apply bg-blue-50/25 backdrop-blur-md border border-blue-200/35 shadow-xl;
   }
 
   .glass-card-green {
-    @apply bg-green-50/20 backdrop-blur-md border border-green-200/30 shadow-xl;
+    @apply bg-green-50/25 backdrop-blur-md border border-green-200/35 shadow-xl;
   }
 
   .glass-card-purple {
-    @apply bg-purple-50/20 backdrop-blur-md border border-purple-200/30 shadow-xl;
+    @apply bg-purple-50/25 backdrop-blur-md border border-purple-200/35 shadow-xl;
   }
 
   .glass-card-orange {
-    @apply bg-orange-50/20 backdrop-blur-md border border-orange-200/30 shadow-xl;
+    @apply bg-orange-50/25 backdrop-blur-md border border-orange-200/35 shadow-xl;
   }
 
   .glass-card-pink {
-    @apply bg-pink-50/20 backdrop-blur-md border border-pink-200/30 shadow-xl;
+    @apply bg-pink-50/25 backdrop-blur-md border border-pink-200/35 shadow-xl;
   }
 
   .glass-card-indigo {
-    @apply bg-indigo-50/20 backdrop-blur-md border border-indigo-200/30 shadow-xl;
+    @apply bg-indigo-50/25 backdrop-blur-md border border-indigo-200/35 shadow-xl;
   }
 
   .glass-card-teal {
-    @apply bg-teal-50/20 backdrop-blur-md border border-teal-200/30 shadow-xl;
+    @apply bg-teal-50/25 backdrop-blur-md border border-teal-200/35 shadow-xl;
   }
 
   .glass-card-yellow {
-    @apply bg-yellow-50/20 backdrop-blur-md border border-yellow-200/30 shadow-xl;
+    @apply bg-yellow-50/25 backdrop-blur-md border border-yellow-200/35 shadow-xl;
   }
 
   .glass-header {
-    @apply bg-white/20 backdrop-blur-lg border-b border-white/20;
+    @apply bg-white/25 backdrop-blur-lg border-b border-white/25;
   }
 
   .glass-button {
-    @apply bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/25 transition-all duration-300;
+    @apply bg-white/15 hover:bg-white/25 backdrop-blur-sm border border-white/30 transition-all duration-300;
+  }
+
+  .photo-credit {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.6);
+    background: rgba(0, 0, 0, 0.2);
+    padding: 4px 8px;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+  }
+
+  .photo-credit a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+  }
+
+  .photo-credit a:hover {
+    color: rgba(255, 255, 255, 1);
+    text-decoration: underline;
   }
 }

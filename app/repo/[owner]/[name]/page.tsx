@@ -189,6 +189,26 @@ export default function RepoPage({ params }: RepoPageProps) {
           </TabsContent>
         </Tabs>
       </main>
+
+      {/* Photo Credit */}
+      <div className="photo-credit">
+        Photo by{" "}
+        <a
+          href="https://unsplash.com/@saveri?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Rajesh Kavasseri
+        </a>{" "}
+        on{" "}
+        <a
+          href="https://unsplash.com/photos/MIpA5-W7Qbk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Unsplash
+        </a>
+      </div>
     </div>
   )
 }
