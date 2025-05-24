@@ -135,15 +135,14 @@
   .photo-credit {
     position: fixed;
     bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 8px;
     font-size: 10px;
     color: rgba(255, 255, 255, 0.8);
     background: rgba(0, 0, 0, 0.3);
     padding: 3px 8px;
     border-radius: 12px;
     backdrop-filter: blur(8px);
-    z-index: 5;
+    z-index: -1;
     border: 1px solid rgba(255, 255, 255, 0.15);
     white-space: nowrap;
     max-width: calc(100vw - 32px);
