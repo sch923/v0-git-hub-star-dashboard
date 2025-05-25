@@ -65,7 +65,7 @@ export default function RepoPage({ params }: RepoPageProps) {
         </Suspense>
 
         <Tabs defaultValue="overview" className="space-y-4">
-          <TabsList className="bg-white/10 backdrop-blur-sm border border-white/20">
+          <TabsList className="flex flex-wrap justify-start max-h-none h-auto bg-white/10 backdrop-blur-sm border border-white/20">
             <TabsTrigger
               value="overview"
               className="text-gray-600 data-[state=active]:bg-white/25 data-[state=active]:text-gray-800"
@@ -100,7 +100,7 @@ export default function RepoPage({ params }: RepoPageProps) {
 
           <TabsContent value="overview" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              <Card className="col-span-2 glass-transparent border-0">
+              <Card className="lg:col-span-2 glass-transparent border-0">
                 <CardHeader>
                   <CardTitle className="text-gray-800">
                     Repository Activity
