@@ -14,7 +14,20 @@ import { RepoTable } from "@/components/repo-table"
 import { SearchForm } from "@/components/search-form"
 import { Skeleton } from "@/components/ui/skeleton"
 
-export default function DashboardPage() {
+import { getServerSession } from "next-auth"
+import { AuthButtons } from "@/components/auth/auth-buttons"
+
+export default async function DashboardPage() {
+  const session = await getServerSession()
+
+  if (!session) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <AuthButtons />
+      </div>
+    )
+  }
+
   return (
     <div className="flex min-h-screen w-full flex-col relative">
       <header className="sticky top-0 z-10 flex h-16 items-center gap-4 glass-header px-4 md:px-6">
@@ -24,6 +37,7 @@ export default function DashboardPage() {
             GitHub Stars Dashboard
           </span>
         </div>
+        <AuthButtons />
       </header>
 
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8 pb-12 md:pb-16">
