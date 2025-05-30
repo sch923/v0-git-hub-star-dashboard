@@ -26,8 +26,9 @@ interface RepoPageProps {
   }
 }
 
-export default function RepoPage({ params }: RepoPageProps) {
-  const { owner, name } = params
+export default async function RepoPage({ params }: RepoPageProps) {
+  // https://nextjs.org/docs/messages/sync-dynamic-apis
+  const { owner, name } = await params
 
   return (
     <div className="flex min-h-screen w-full flex-col relative">
