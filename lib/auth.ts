@@ -10,8 +10,8 @@ declare module "next-auth" {
 export const authOptions = {
   providers: [
     GitHubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+      clientId: process.env.GITHUB_CLIENT_ID || "dummy_client_id",
+      clientSecret: process.env.GITHUB_CLIENT_SECRET || "dummy_client_secret",
     }),
   ],
   callbacks: {
@@ -28,6 +28,7 @@ export const authOptions = {
       return session
     },
   },
+  secret: process.env.NEXTAUTH_SECRET || "fallback_secret_for_development",
 }
 
 export default NextAuth(authOptions)
