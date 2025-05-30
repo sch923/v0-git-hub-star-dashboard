@@ -7,7 +7,7 @@ declare module "next-auth" {
   }
 }
 
-const authConfig = {
+export const handler = NextAuth({
   providers: [
     GitHub({
       clientId: process.env.GITHUB_CLIENT_ID!,
@@ -15,20 +15,17 @@ const authConfig = {
     }),
   ],
   callbacks: {
-    async jwt({ token, account }: any) {
+    async jwt({ token, account }) {
       if (account) {
         token.accessToken = account.access_token
       }
       return token
     },
-    async session({ session, token }: any) {
+    async session({ session, token }) {
       if (token) {
         session.accessToken = token.accessToken as string
       }
       return session
     },
   },
-}
-
-export const { handlers, auth, signIn, signOut } = NextAuth(authConfig)
-export const handler = handlers
+})
