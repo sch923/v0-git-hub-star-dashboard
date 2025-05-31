@@ -12,56 +12,89 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import useSWR from "swr"
+import axios from "axios"
 
 interface RepoTableProps {
-  sortBy?: "stars" | "growth"
+  sortBy?: "stars" | "contributors"
 }
 
 // Sample data - in a real app, this would come from the GitHub API
+/*
 const repositories = [
   {
     name: "next.js",
     owner: "vercel",
     stars: 112345,
-    growth: 1200,
+    contributors: 1200,
     language: "TypeScript",
   },
   {
     name: "react",
     owner: "facebook",
     stars: 198000,
-    growth: 800,
+    contributors: 800,
     language: "JavaScript",
   },
   {
     name: "v0",
     owner: "vercel",
     stars: 42000,
-    growth: 1234,
+    contributors: 1234,
     language: "TypeScript",
   },
   {
     name: "svelte",
     owner: "sveltejs",
     stars: 68000,
-    growth: 500,
+    contributors: 500,
     language: "TypeScript",
   },
   {
     name: "tailwindcss",
     owner: "tailwindlabs",
     stars: 71000,
-    growth: 600,
+    contributors: 600,
     language: "CSS",
   },
 ]
+*/
+interface Repository {
+  name: string
+  owner: string
+  stars: number
+  language: string
+  contributors?: number // Optional, in case contributor data is not available
+}
+
+const fetcher = (url: string) => axios(url).then((res) => res.data)
+
+function useRepositories() {
+  const { data, error } = useSWR<Repository[]>("/api/github/repos", fetcher)
+  return {
+    repositories: data ?? [],
+    isLoading: !error && !data,
+    isError: !!error,
+  }
+}
 
 export function RepoTable({ sortBy = "stars" }: RepoTableProps) {
+  const { repositories, isLoading, isError } = useRepositories()
+  if (isLoading) {
+    return <div className="text-gray-500">Loading...</div>
+  }
+  if (isError) {
+    return <div className="text-red-500">Failed to load repositories</div>
+  }
+  if (repositories.length === 0) {
+    return <div className="text-gray-500">No repositories found</div>
+  }
   const sortedRepos = [...repositories].sort((a, b) => {
     if (sortBy === "stars") {
       return b.stars - a.stars
     } else {
-      return b.growth - a.growth
+      // Ensure both branches return a number
+      return (b.contributors ?? 0) - (a.contributors ?? 0)
     }
   })
 
@@ -73,12 +106,14 @@ export function RepoTable({ sortBy = "stars" }: RepoTableProps) {
             <TableHead className="text-gray-900 font-bold drop-shadow-sm">
               Repository
             </TableHead>
-            <TableHead className="text-right text-gray-900 font-bold drop-shadow-sm">
-              Stars
-            </TableHead>
-            {sortBy === "growth" && (
+            {sortBy === "stars" && (
               <TableHead className="text-right text-gray-900 font-bold drop-shadow-sm">
-                Growth
+                Stars
+              </TableHead>
+            )}
+            {sortBy === "contributors" && (
+              <TableHead className="text-right text-gray-900 font-bold drop-shadow-sm">
+                Contributors
               </TableHead>
             )}
           </TableRow>
@@ -108,21 +143,23 @@ export function RepoTable({ sortBy = "stars" }: RepoTableProps) {
                   </Badge>
                 </Link>
               </TableCell>
-              <TableCell className="text-right">
-                <div className="flex items-center justify-end gap-1">
-                  <span className="text-gray-900 font-bold drop-shadow-sm">
-                    {repo.stars.toLocaleString()}
-                  </span>
-                  <StarIcon className="h-4 w-4 text-yellow-600 drop-shadow-sm" />
-                </div>
-              </TableCell>
-              {sortBy === "growth" && (
+              {sortBy === "stars" && (
+                <TableCell className="text-right">
+                  <div className="flex items-center justify-end gap-1">
+                    <span className="text-gray-900 font-bold drop-shadow-sm">
+                      {repo.stars.toLocaleString()}
+                    </span>
+                    <StarIcon className="h-4 w-4 text-yellow-600 drop-shadow-sm" />
+                  </div>
+                </TableCell>
+              )}
+              {sortBy === "contributors" && (
                 <TableCell className="text-right">
                   <Badge
                     variant="outline"
                     className="bg-green-50/80 border-green-300/80 text-green-900 font-medium"
                   >
-                    +{repo.growth.toLocaleString()} this week
+                    {(repo.contributors ?? 0).toLocaleString()} contributors
                   </Badge>
                 </TableCell>
               )}

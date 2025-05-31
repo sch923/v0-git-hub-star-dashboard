@@ -190,10 +190,10 @@ export default async function DashboardPage() {
                     Stars
                   </TabsTrigger>
                   <TabsTrigger
-                    value="growth"
+                    value="contributors"
                     className="text-gray-700 data-[state=active]:bg-white/35 data-[state=active]:text-gray-900 drop-shadow-sm"
                   >
-                    Growth
+                    Contributors
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="stars">
@@ -205,13 +205,13 @@ export default async function DashboardPage() {
                     <RepoTable />
                   </Suspense>
                 </TabsContent>
-                <TabsContent value="growth">
+                <TabsContent value="contributors">
                   <Suspense
                     fallback={
                       <Skeleton className="h-[350px] w-full bg-gray-200/50" />
                     }
                   >
-                    <RepoTable sortBy="growth" />
+                    <RepoTable sortBy="contributors" />
                   </Suspense>
                 </TabsContent>
               </Tabs>
