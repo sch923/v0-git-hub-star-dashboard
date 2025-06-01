@@ -29,7 +29,7 @@ const fetcher = (url: string) => axios(url).then((res) => res.data)
 
 function useContributors(owner: string, name: string) {
   const { data, error } = useSWR<Contributor[]>(
-    `/api/github/${owner}/${name}/contributors`,
+    `/api/github/repos/${owner}/${name}/contributors`,
     fetcher
   )
   return {
