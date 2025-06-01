@@ -2,78 +2,77 @@
 import { GitCommitIcon } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Progress } from "@/components/ui/progress"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import axios from "axios"
+import useSWR from "swr"
 
 interface RepoContributorsProps {
   owner: string
   name: string
 }
 
-// Sample data - in a real app, this would come from the GitHub API
+interface Contributor {
+  login: string
+  avatar_url: string
+  contributions: number
+  url: string
+}
+
+const fetcher = (url: string) => axios(url).then((res) => res.data)
+
+function useContributors(owner: string, name: string) {
+  const { data, error } = useSWR<Contributor[]>(
+    `/api/github/${owner}/${name}/contributors`,
+    fetcher
+  )
+  return {
+    contributors: data ?? [],
+    isLoading: !error && !data,
+    isError: !!error,
+  }
+}
+
 const getContributors = (owner: string, name: string) => {
-  // This is mock data
-  return [
-    {
-      login: "contributor1",
-      avatar_url: "https://github.com/shadcn.png",
-      contributions: 1234,
-      url: "https://github.com/contributor1",
-    },
-    {
-      login: "contributor2",
-      avatar_url: "https://github.com/vercel.png",
-      contributions: 987,
-      url: "https://github.com/contributor2",
-    },
-    {
-      login: "contributor3",
-      avatar_url: "https://github.com/github.png",
-      contributions: 876,
-      url: "https://github.com/contributor3",
-    },
-    {
-      login: "contributor4",
-      avatar_url: "https://github.com/tailwindlabs.png",
-      contributions: 765,
-      url: "https://github.com/contributor4",
-    },
-    {
-      login: "contributor5",
-      avatar_url: "https://github.com/facebook.png",
-      contributions: 654,
-      url: "https://github.com/contributor5",
-    },
-    {
-      login: "contributor6",
-      avatar_url: "https://github.com/google.png",
-      contributions: 543,
-      url: "https://github.com/contributor6",
-    },
-    {
-      login: "contributor7",
-      avatar_url: "https://github.com/microsoft.png",
-      contributions: 432,
-      url: "https://github.com/contributor7",
-    },
-    {
-      login: "contributor8",
-      avatar_url: "https://github.com/apple.png",
-      contributions: 321,
-      url: "https://github.com/contributor8",
-    },
-    {
-      login: "contributor9",
-      avatar_url: "https://github.com/twitter.png",
-      contributions: 210,
-      url: "https://github.com/contributor9",
-    },
-    {
-      login: "contributor10",
-      avatar_url: "https://github.com/netflix.png",
-      contributions: 109,
-      url: "https://github.com/contributor10",
-    },
-  ]
+  const { contributors, isLoading, isError } = useContributors(owner, name)
+  if (isLoading) {
+    return [
+      {
+        login: "loading",
+        avatar_url: "/placeholder.svg",
+        contributions: 0,
+        url: "#",
+      },
+    ]
+  }
+  if (isError) {
+    return [
+      {
+        login: "error",
+        avatar_url: "/placeholder.svg",
+        contributions: 0,
+        url: "#",
+      },
+    ]
+  }
+  if (contributors.length === 0) {
+    return [
+      {
+        login: "no-contributors",
+        avatar_url: "/placeholder.svg",
+        contributions: 0,
+        url: "#",
+      },
+    ]
+  }
+
+  return contributors
 }
 
 export function RepoContributors({ owner, name }: RepoContributorsProps) {
@@ -95,8 +94,13 @@ export function RepoContributors({ owner, name }: RepoContributorsProps) {
             <TableCell>
               <div className="flex items-center gap-2">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage src={contributor.avatar_url || "/placeholder.svg"} alt={contributor.login} />
-                  <AvatarFallback>{contributor.login.slice(0, 2).toUpperCase()}</AvatarFallback>
+                  <AvatarImage
+                    src={contributor.avatar_url || "/placeholder.svg"}
+                    alt={contributor.login}
+                  />
+                  <AvatarFallback>
+                    {contributor.login.slice(0, 2).toUpperCase()}
+                  </AvatarFallback>
                 </Avatar>
                 <a
                   href={contributor.url}
@@ -116,9 +120,16 @@ export function RepoContributors({ owner, name }: RepoContributorsProps) {
             </TableCell>
             <TableCell className="hidden md:table-cell">
               <div className="flex items-center gap-2">
-                <Progress value={(contributor.contributions / maxContributions) * 100} className="h-2" />
+                <Progress
+                  value={(contributor.contributions / maxContributions) * 100}
+                  className="h-2"
+                />
                 <span className="text-xs text-muted-foreground">
-                  {((contributor.contributions / maxContributions) * 100).toFixed(1)}%
+                  {(
+                    (contributor.contributions / maxContributions) *
+                    100
+                  ).toFixed(1)}
+                  %
                 </span>
               </div>
             </TableCell>
