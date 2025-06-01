@@ -19,46 +19,6 @@ interface RepoTableProps {
   sortBy?: "stars" | "contributors"
 }
 
-// Sample data - in a real app, this would come from the GitHub API
-/*
-const repositories = [
-  {
-    name: "next.js",
-    owner: "vercel",
-    stars: 112345,
-    contributors: 1200,
-    language: "TypeScript",
-  },
-  {
-    name: "react",
-    owner: "facebook",
-    stars: 198000,
-    contributors: 800,
-    language: "JavaScript",
-  },
-  {
-    name: "v0",
-    owner: "vercel",
-    stars: 42000,
-    contributors: 1234,
-    language: "TypeScript",
-  },
-  {
-    name: "svelte",
-    owner: "sveltejs",
-    stars: 68000,
-    contributors: 500,
-    language: "TypeScript",
-  },
-  {
-    name: "tailwindcss",
-    owner: "tailwindlabs",
-    stars: 71000,
-    contributors: 600,
-    language: "CSS",
-  },
-]
-*/
 interface Repository {
   name: string
   owner: string
