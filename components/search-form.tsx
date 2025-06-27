@@ -22,7 +22,11 @@ export function SearchForm({ className, ...props }: SearchFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`flex w-full max-w-sm items-center space-x-2 ${className}`} {...props}>
+    <form
+      onSubmit={handleSubmit}
+      className={`flex w-full max-w-sm items-center space-x-2 ${className}`}
+      {...props}
+    >
       <Input
         type="search"
         placeholder="Search repositories..."
