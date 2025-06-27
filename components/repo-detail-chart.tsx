@@ -2,7 +2,6 @@
 
 import type React from "react"
 
-import { useEffect, useState } from "react"
 import {
   Area,
   AreaChart,
@@ -19,6 +18,8 @@ import {
 } from "recharts"
 
 import { Card } from "@/components/ui/card"
+import axios from "axios"
+import useSWR from "swr"
 
 interface RepoDetailChartProps extends React.HTMLAttributes<HTMLDivElement> {
   owner: string
@@ -27,54 +28,132 @@ interface RepoDetailChartProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string
 }
 
-// Sample data - in a real app, this would come from the GitHub API
-const getChartData = (owner: string, name: string, type: string) => {
-  // This is mock data
-  const baseData = [
-    { name: "Jan", value: 1000 },
-    { name: "Feb", value: 1500 },
-    { name: "Mar", value: 2000 },
-    { name: "Apr", value: 2500 },
-    { name: "May", value: 3000 },
-    { name: "Jun", value: 3500 },
-    { name: "Jul", value: 4000 },
-    { name: "Aug", value: 5000 },
-    { name: "Sep", value: 6000 },
-    { name: "Oct", value: 7000 },
-    { name: "Nov", value: 9000 },
-    { name: "Dec", value: 11000 },
-  ]
+interface Star {
+  [name: string]: number
+}
+interface Fork {
+  [name: string]: number
+}
+interface Contribution {
+  name: string
+  openIssues: number
+  closedIssues: number
+  openPRs: number
+  closedPRs: number
+}
+interface Activity {
+  name: string
+  commits: number
+  issues: number
+  pullRequests: number
+}
 
-  if (type === "stars") {
-    return baseData.map((item) => ({
-      name: item.name,
-      stars: item.value * (name === "next.js" ? 10 : 4),
-    }))
-  } else if (type === "forks") {
-    return baseData.map((item) => ({
-      name: item.name,
-      forks: Math.floor(item.value * 0.2) * (name === "next.js" ? 10 : 4),
-    }))
-  } else if (type === "issues") {
-    return baseData.map((item) => ({
-      name: item.name,
-      openIssues: Math.floor(item.value * 0.1) * (name === "next.js" ? 1 : 0.4),
-      closedIssues:
-        Math.floor(item.value * 0.08) * (name === "next.js" ? 1 : 0.4),
-      openPRs: Math.floor(item.value * 0.05) * (name === "next.js" ? 1 : 0.4),
-      closedPRs: Math.floor(item.value * 0.04) * (name === "next.js" ? 1 : 0.4),
-    }))
-  } else if (type === "activity") {
-    return baseData.map((item) => ({
-      name: item.name,
-      commits: Math.floor(item.value * 0.3) * (name === "next.js" ? 10 : 4),
-      issues: Math.floor(item.value * 0.1) * (name === "next.js" ? 10 : 4),
-      pullRequests:
-        Math.floor(item.value * 0.05) * (name === "next.js" ? 10 : 4),
-    }))
+const fetcher = (url: string) => axios(url).then((res) => res.data)
+
+function useStars(owner: string, name: string) {
+  const { data, error } = useSWR<Star[]>(
+    `/api/github/repos/${owner}/${name}/stars`,
+    fetcher
+  )
+  return {
+    stars: data ?? [],
+    isLoading: !error && !data,
+    isError: !!error,
+  }
+}
+function useForks(owner: string, name: string) {
+  const { data, error } = useSWR<Fork[]>(
+    `/api/github/repos/${owner}/${name}/forks`,
+    fetcher
+  )
+  return {
+    forks: data ?? [],
+    isLoading: !error && !data,
+    isError: !!error,
+  }
+}
+function useContributions(owner: string, name: string) {
+  const { data, error } = useSWR<Contribution[]>(
+    `/api/github/repos/${owner}/${name}/contributions`,
+    fetcher
+  )
+  return {
+    contributions: data ?? [],
+    isLoading: !error && !data,
+    isError: !!error,
+  }
+}
+function useActivity(owner: string, name: string) {
+  const { data, error } = useSWR<Activity[]>(
+    `/api/github/repos/${owner}/${name}/activities`,
+    fetcher
+  )
+  return {
+    activity: data ?? [],
+    isLoading: !error && !data,
+    isError: !!error,
+  }
+}
+
+function useRepoDetailChartData(
+  owner: string,
+  name: string,
+  type: RepoDetailChartProps["type"]
+) {
+  const {
+    stars,
+    isLoading: isStarsLoading,
+    isError: isStarsError,
+  } = useStars(owner, name)
+  const {
+    forks,
+    isLoading: isForksLoading,
+    isError: isForksError,
+  } = useForks(owner, name)
+  const {
+    contributions,
+    isLoading: isContributionsLoading,
+    isError: isContributionsError,
+  } = useContributions(owner, name)
+  const {
+    activity,
+    isLoading: isActivityLoading,
+    isError: isActivityError,
+  } = useActivity(owner, name)
+
+  let data: Star[] | Fork[] | Contribution[] | Activity[] = []
+  let isLoading = false
+  let isError = false
+
+  switch (type) {
+    case "stars":
+      data = stars
+      isLoading = isStarsLoading
+      isError = isStarsError
+      break
+    case "forks":
+      data = forks
+      isLoading = isForksLoading
+      isError = isForksError
+      break
+    case "issues":
+      data = contributions
+      isLoading = isContributionsLoading
+      isError = isContributionsError
+      break
+    case "activity":
+      data = activity
+      isLoading = isActivityLoading
+      isError = isActivityError
+      break
+    default:
+      data = []
+      isLoading = false
+      isError = true
+      break
   }
 
-  return baseData
+  return { data, isLoading, isError }
 }
 
 export function RepoDetailChart({
@@ -84,23 +163,7 @@ export function RepoDetailChart({
   className,
   ...props
 }: RepoDetailChartProps) {
-  const [mounted, setMounted] = useState(false)
-  const data = getChartData(owner, name, type)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // クライアントサイドレンダリングのためのプレースホルダー
-  if (!mounted) {
-    return (
-      <div
-        className={`${className} flex items-center justify-center bg-white/25 backdrop-blur-lg`}
-      >
-        <p className="text-muted-foreground">Loading chart...</p>
-      </div>
-    )
-  }
+  const { data, isLoading, isError } = useRepoDetailChartData(owner, name, type)
 
   const axisProps = {
     tick: { fill: "#111827", fontSize: 12, fontWeight: "bold" },
@@ -132,6 +195,25 @@ export function RepoDetailChart({
       )
     }
     return null
+  }
+
+  if (isError) {
+    return (
+      <div
+        className={`${className} flex items-center justify-center bg-white/25 backdrop-blur-lg`}
+      >
+        <p className="text-red-500">Error loading chart data</p>
+      </div>
+    )
+  }
+  if (isLoading) {
+    return (
+      <div
+        className={`${className} flex items-center justify-center bg-white/25 backdrop-blur-lg`}
+      >
+        <p className="text-muted-foreground">Loading chart...</p>
+      </div>
+    )
   }
 
   const renderChart = () => {

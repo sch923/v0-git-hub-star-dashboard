@@ -1,3 +1,4 @@
+// app/api/github/repos/[owner]/[repo]/contributors/route.ts
 import { authOptions } from "@/lib/auth"
 import { Octokit } from "@octokit/rest"
 import { getServerSession } from "next-auth"
