@@ -166,7 +166,8 @@ export default async function RepoPage({ params }: RepoPageProps) {
               <CardHeader>
                 <CardTitle className="text-gray-800">Star History</CardTitle>
                 <CardDescription className="text-gray-600">
-                  Star count over time
+                  Star count over time. *It will take a little time to aggregate
+                  the data.
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-0 pt-4">
