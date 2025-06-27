@@ -66,7 +66,6 @@ export function RepoStarChart({ className, ...props }: RepoStarChartProps) {
     setMounted(true)
   }, [])
 
-  // クライアントサイドレンダリングのためのプレースホルダー
   if (!mounted) {
     return (
       <div
