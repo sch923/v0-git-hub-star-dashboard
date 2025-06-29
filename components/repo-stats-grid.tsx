@@ -9,30 +9,44 @@ import {
   UsersIcon,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import useSWR from "swr"
+import { RepoStats } from "@/types"
+import axios from "axios"
 
 interface RepoStatsGridProps {
   owner: string
   name: string
 }
+const fetcher = (url: string) => axios(url).then((res) => res.data)
 
-// Sample data - in a real app, this would come from the GitHub API
-const getRepoStats = (owner: string, name: string) => {
-  // This is mock data
+function useRepoStats(owner: string, name: string) {
+  const { data, error } = useSWR<RepoStats>(
+    `/api/github/repos/${owner}/${name}`,
+    fetcher
+  )
   return {
-    stars: name === "next.js" ? 112345 : 42000,
-    forks: name === "next.js" ? 24680 : 5678,
-    issues: name === "next.js" ? 1234 : 456,
-    pullRequests: name === "next.js" ? 567 : 123,
-    contributors: name === "next.js" ? 2468 : 789,
-    commits: name === "next.js" ? 35791 : 12345,
-    starsGrowth: name === "next.js" ? "+1,200 this week" : "+500 this week",
-    lastUpdated: "2 hours ago",
+    stats: data,
+    isLoading: !error && !data,
+    isError: !!error,
   }
 }
 
 export function RepoStatsGrid({ owner, name }: RepoStatsGridProps) {
-  const stats = getRepoStats(owner, name)
-
+  const { stats, isLoading, isError } = useRepoStats(owner, name)
+  if (isError) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <p className="text-red-500">Failed to load repository stats.</p>
+      </div>
+    )
+  }
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <p className="text-gray-500">Loading...</p>
+      </div>
+    )
+  }
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
       <Card className="glass-card-yellow border-0">
@@ -41,8 +55,9 @@ export function RepoStatsGrid({ owner, name }: RepoStatsGridProps) {
           <StarIcon className="h-4 w-4 text-yellow-400" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.stars.toLocaleString()}</div>
-          <p className="text-xs text-muted-foreground">{stats.starsGrowth}</p>
+          <div className="text-2xl font-bold">
+            {stats?.stars?.toLocaleString() ?? "-"}
+          </div>
         </CardContent>
       </Card>
       <Card className="glass-card-blue border-0">
@@ -51,8 +66,16 @@ export function RepoStatsGrid({ owner, name }: RepoStatsGridProps) {
           <GitForkIcon className="h-4 w-4 text-blue-500" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.forks.toLocaleString()}</div>
-          <p className="text-xs text-muted-foreground">Fork ratio: {((stats.forks / stats.stars) * 100).toFixed(1)}%</p>
+          <div className="text-2xl font-bold">
+            {stats?.forks?.toLocaleString() ?? "-"}
+          </div>
+          <p className="text-xs text-muted-foreground">
+            Fork ratio:{" "}
+            {stats?.forks && stats?.stars
+              ? ((stats.forks / stats.stars) * 100).toFixed(1)
+              : "-"}
+            %
+          </p>
         </CardContent>
       </Card>
       <Card className="glass-card-orange border-0">
@@ -61,8 +84,12 @@ export function RepoStatsGrid({ owner, name }: RepoStatsGridProps) {
           <IssueOpenedIcon className="h-4 w-4 text-orange-500" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.issues.toLocaleString()}</div>
-          <p className="text-xs text-muted-foreground">{stats.pullRequests} open PRs</p>
+          <div className="text-2xl font-bold">
+            {stats?.issues?.toLocaleString() ?? "-"}
+          </div>
+          <p className="text-xs text-muted-foreground">
+            {stats?.pullRequests ?? "-"} open PRs
+          </p>
         </CardContent>
       </Card>
       <Card className="glass-card-green border-0">
@@ -71,7 +98,9 @@ export function RepoStatsGrid({ owner, name }: RepoStatsGridProps) {
           <UsersIcon className="h-4 w-4 text-green-500" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.contributors.toLocaleString()}</div>
+          <div className="text-2xl font-bold">
+            {stats?.contributors?.toLocaleString() ?? "-"}
+          </div>
           <p className="text-xs text-muted-foreground">Active community</p>
         </CardContent>
       </Card>
@@ -81,7 +110,9 @@ export function RepoStatsGrid({ owner, name }: RepoStatsGridProps) {
           <CodeIcon className="h-4 w-4 text-purple-500" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.commits.toLocaleString()}</div>
+          <div className="text-2xl font-bold">
+            {stats?.commits?.toLocaleString() ?? "-"}
+          </div>
           <p className="text-xs text-muted-foreground">Total commits</p>
         </CardContent>
       </Card>
@@ -91,7 +122,7 @@ export function RepoStatsGrid({ owner, name }: RepoStatsGridProps) {
           <CalendarIcon className="h-4 w-4 text-indigo-500" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats.lastUpdated}</div>
+          <div className="text-2xl font-bold">{stats?.lastUpdated}</div>
           <p className="text-xs text-muted-foreground">Active development</p>
         </CardContent>
       </Card>

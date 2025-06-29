@@ -1,4 +1,5 @@
 import { Suspense } from "react"
+import type { JSX } from "react"
 import Link from "next/link"
 import { ArrowLeft, StarIcon } from "lucide-react"
 
@@ -26,7 +27,16 @@ interface RepoPageProps {
   }
 }
 
-export default async function RepoPage({ params }: RepoPageProps) {
+/**
+ * RepoPage コンポーネント
+ * 指定された GitHub リポジトリの詳細と統計情報を表示します。
+ *
+ * @param {RepoPageProps} props - リポジトリのオーナーと名前を含む props
+ * @returns {JSX.Element} リポジトリ詳細ページ。
+ */
+export default async function RepoPage({
+  params,
+}: RepoPageProps): Promise<JSX.Element> {
   // https://nextjs.org/docs/messages/sync-dynamic-apis
   const { owner, name } = await params
 
